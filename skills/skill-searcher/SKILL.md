@@ -1,6 +1,6 @@
 ---
 name: skill-searcher
-description: Search across all skill files in the workspace by keyword or tag. Useful for finding relevant skills before building new agents or when OpenClaw needs to discover what capabilities already exist.
+description: Search across all skill files in the workspace by keyword or tag. Useful for finding relevant skills before building new agents or when an agent needs to discover what capabilities already exist.
 ---
 
 # Skill Searcher
@@ -10,16 +10,16 @@ A utility skill that scans your entire `skills/` directory tree to find relevant
 ## When to Use
 
 - Before building a new agent — check if a relevant skill already exists
-- When OpenClaw needs to discover capabilities it can use for a task
+- When an agent needs to discover capabilities it can use for a task
 - For auditing: see all skills related to a topic (e.g., "notion", "telegram", "research")
 
 ## How to Use
 
-### On the VPS (OpenClaw)
+### On a remote host
 
-Tell OpenClaw:
+Tell the agent:
 ```
-Search through all files in /opt/openclaw/skills/ for skills related to "[keyword]".
+Search through all files in <SKILLS_DIR>/ for skills related to "[keyword]".
 For each match, report:
 - File path
 - The skill name (from YAML frontmatter or first heading)
@@ -42,10 +42,10 @@ find /path/to/Gemini\ Gems/skills/ -name "SKILL.md" -exec grep -l "[keyword]" {}
 
 ## Advanced: Self-Updating Skill Index
 
-For faster searches, you can have OpenClaw maintain a skill index:
+For faster searches, you can have the agent maintain a skill index:
 
 ```
-Create and maintain a file at /opt/openclaw/skills/INDEX.md that lists every skill.
+Create and maintain a file at <SKILLS_DIR>/INDEX.md that lists every skill.
 Format:
 | Skill Name | Path | Description | Tags |
 Update this index whenever a new skill is created.
@@ -60,7 +60,7 @@ The orchestrator agent should reference this skill when it receives a task it's 
 ```markdown
 # In orchestrator soul.md, add:
 When you receive a task and are unsure which sub-agent or skill to use:
-1. First, check /opt/openclaw/skills/INDEX.md for matching skills
+1. First, check <SKILLS_DIR>/INDEX.md for matching skills
 2. If no match, search all skill files with keyword matching
 3. If still no match, research how to build the capability
 ```

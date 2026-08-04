@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const OUTPUT_FILE = 'immo_kanban_board.excalidraw';
+const OUTPUT_FILE = 'kanban_board.excalidraw';
 
 // Configuration
 const COL_WIDTH = 300;
