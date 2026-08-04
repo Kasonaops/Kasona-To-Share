@@ -1,54 +1,44 @@
 # Kasona To-Share
 
-Kuratierte, teilbare AI-Agent-Skills, Plugins und Prompts.
+Curated, shareable AI agent skills, plugins, prompts and patterns.
 
-Dieses Repository enthält **ausschließlich generische, wiederverwendbare Inhalte**. Es ist bewusst mit frischer Git-History angelegt und von den internen Repositories getrennt — es enthält keine Kundendaten, keine Team-Informationen, keine Infrastruktur-Details und keine Credentials.
+This repository contains **only generic, reusable material**. It was deliberately created with fresh git history, separate from the internal repositories — it holds no customer data, no team information, no infrastructure details and no credentials.
 
-> **Interne Inhalte gehören hier nicht hinein.** Alles Kunden-, Team- oder Infrastruktur-bezogene lebt in den internen Repositories. Siehe [Beitragen](#beitragen).
+> **Internal content does not belong here.** Anything customer-, team- or infrastructure-related lives in `Kasona-Team-Internal`. See [Contributing](#contributing).
 
-## Inhalt
+See [INDEX.md](INDEX.md) for the full contents.
 
-### `plugins/`
+## Layout
 
-| Plugin | Beschreibung |
-|---|---|
-| `seo-audit` | Technisches SEO-Audit: Kategorien, Prüfkriterien, Reporting-Struktur |
-| `seo-optimizing` | SEO-Optimierung: Analysis-Playbooks, Keyword- und Ranking-Arbeit |
+| Folder | What it holds |
+| --- | --- |
+| `plugins/` | Claude Code plugins, installable as-is |
+| `skills/` | Agent skills following the `SKILL.md` convention |
+| `patterns/` | Framework-agnostic implementation patterns — concept guides, not libraries |
+| `prompts/` | Standalone prompts |
 
-### `skills/`
+## Usage
 
-| Skill | Beschreibung |
-|---|---|
-| `error-handling-patterns` | Muster für robuste Fehlerbehandlung in Agent-Workflows |
-| `excalidraw-diagrams` | Programmatische Erzeugung von Excalidraw-Diagrammen |
-| `humanizing-text` | Text von generischem AI-Duktus in natürliche Sprache überführen |
-| `skill-searcher` | Passenden Skill aus einer Skill-Bibliothek finden (Semantic Matching) |
-| `ui-ux-pro-max` | UI/UX-Referenz: Style-Systeme, Farbpaletten, Komponenten-Patterns |
+Each skill follows the `SKILL.md` convention: a description with trigger conditions in frontmatter, followed by the instructions. Reference files live under `references/`.
 
-### `prompts/`
+Skills can be used directly in Claude Code, Claude.ai or comparable environments — copy the folder into your skills directory.
 
-| Prompt | Beschreibung |
-|---|---|
-| `ultimate-debugger-prompt` | Strukturierter Debugging-Prompt mit Beispielen |
+## Contributing
 
-## Nutzung
+Before anything lands here it must pass the redaction check:
 
-Jeder Skill folgt der `SKILL.md`-Konvention: eine Beschreibung mit Trigger-Bedingungen im Frontmatter, gefolgt von der Arbeitsanweisung. Referenzdateien liegen jeweils unter `references/`.
+- [ ] No customer names, offers, pricing or contract data
+- [ ] No team members, email addresses or personal data
+- [ ] No Notion database IDs, internal URLs or workspace references
+- [ ] No infrastructure details (servers, ports, tunnels, deployment paths)
+- [ ] No API keys, tokens or credentials
+- [ ] No absolute local filesystem paths
+- [ ] No brand-specific voice or ICP definitions tied to a real person
 
-Skills lassen sich direkt in Claude Code, Claude.ai oder vergleichbaren Umgebungen einsetzen — den jeweiligen Ordner in das Skills-Verzeichnis kopieren.
+Rule of thumb: if an outsider could learn something about customers, the team or our systems from it, it does not belong here.
 
-## Beitragen
+When in doubt, do not commit — ask first. **A pushed commit cannot be reliably removed from git history.**
 
-Bevor etwas hier landet, muss es den Redaktions-Check bestehen:
+## Language
 
-- [ ] Keine Kundennamen, Angebote, Preise oder Vertragsdaten
-- [ ] Keine Team-Mitglieder, E-Mail-Adressen oder personenbezogenen Daten
-- [ ] Keine Notion-Datenbank-IDs, internen URLs oder Workspace-Referenzen
-- [ ] Keine Infrastruktur-Details (Server, Ports, Tunnel, Deployment-Pfade)
-- [ ] Keine API-Keys, Tokens oder Credentials
-- [ ] Keine absoluten lokalen Dateipfade
-- [ ] Keine markenspezifische Tonalität oder ICP-Definitionen einer realen Person
-
-Faustregel: Wenn ein Außenstehender aus dem Inhalt etwas über Kunden, Team oder Systeme lernen kann, gehört er nicht hierher.
-
-Bei Zweifeln: nicht committen, sondern vorher fragen. Ein einmal gepushter Commit lässt sich nicht zuverlässig aus der History entfernen.
+Written in English. See `CONVENTIONS.md` in `Kasona-Team-Internal` for the full rule.
