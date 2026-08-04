@@ -1,0 +1,33 @@
+{
+  "name": "benai-skills",
+  "owner": {
+    "name": "naveedharri",
+    "email": "naveedharri@gmail.com"
+  },
+  "metadata": {
+    "description": "BenAI expert skills marketplace - n8n automation, video editing, and more"
+  },
+  "plugins": [
+    {
+      "name": "seo-optimizing",
+      "source": "./plugins/seo/seo-optimizing",
+      "description": "Data-driven SEO optimization using Google Search Console \u2014 find striking-distance keywords, fix low-CTR pages, detect cannibalization, and execute content optimizations backed by real search data.",
+      "version": "1.0.0",
+      "author": {
+        "name": "BenAI"
+      },
+      "keywords": [
+        "seo",
+        "optimization",
+        "google-search-console",
+        "gsc",
+        "ctr",
+        "keywords",
+        "cannibalization",
+        "striking-distance",
+        "search-performance",
+        "content-optimization"
+      ]
+    }
+  ]
+}
