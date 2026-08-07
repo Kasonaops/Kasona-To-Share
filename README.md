@@ -1,12 +1,14 @@
 # Kasona To-Share
 
-Curated, shareable AI agent skills, plugins, prompts and patterns.
+A small thank-you from the Kasona team: a curated collection of the AI agent skills, plugins, prompts and patterns that help us in our everyday work and business. We believe in sharing and building in public, so we're putting them out here for anyone to use.
 
-This repository contains **only generic, reusable material**. It was deliberately created with fresh git history, separate from the internal repositories — it holds no customer data, no team information, no infrastructure details and no credentials.
+This repository contains **only generic, reusable material**. It was deliberately created with fresh git history, separate from our internal repositories — it holds no customer data, no team information, no infrastructure details and no credentials.
 
 > **Internal content does not belong here.** Anything customer-, team- or infrastructure-related lives in `Kasona-Team-Internal`. See [Contributing](#contributing).
 
 See [INDEX.md](INDEX.md) for the full contents.
+
+Questions, feedback, or ideas for what to share next? Reach out at [hallo@kasona.ai](mailto:hallo@kasona.ai).
 
 ## Layout
 
