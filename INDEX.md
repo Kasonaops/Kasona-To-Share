@@ -47,6 +47,7 @@ Framework-agnostic implementation patterns. Concept guides, not libraries.
 | Pattern | Purpose |
 | --- | --- |
 | [guided-tour-pattern](patterns/guided-tour-pattern.md) | Interactive onboarding walkthrough: spotlight overlay, step data model, persistence |
+| [remotion-video-generation](patterns/remotion-video-generation.md) | Turn a codebase, service description and brand assets into automated videos with Remotion + Claude Code |
 
 ## `prompts/`
 
