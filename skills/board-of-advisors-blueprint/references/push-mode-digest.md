@@ -71,11 +71,37 @@ is the main failure mode of watching people.
 entry with no downside column is a sign the caveat was not applied, not that this operator is an
 exception.
 
+## Give every entry a stable handle, and never reuse it
+
+Each watched operator, each lens, each journal entry gets an identifier that is assigned once and
+never changes: a short slug, a number, a filename, whatever fits how you work. The rule that
+matters is not which format you pick, it is that **an identifier is never reassigned and never
+renumbered**, not even when you reorganise, retire an entry, or decide the ordering was wrong.
+
+The reason is that renumbering breaks references silently. A journal entry from eight months ago
+that says "took this on the strength of what operator 4 shipped" still resolves to something
+after a renumber, it just resolves to the wrong thing, and nothing anywhere reports an error. A
+dead link announces itself. A link that quietly now points at a different subject does not, and
+you will trust it because it still looks valid.
+
+Two practical consequences:
+
+- **Retire, do not delete or reuse.** A retired entry keeps its identifier forever. The slot is
+  spent. If you later add a similar operator, they get a new one.
+- **Grouping is a convenience, not a meaning.** It is tempting to make identifiers carry
+  information, all content operators in one number range, all product people in another. That
+  works right up until an entry belongs in two groups or moves between them, at which point you
+  either renumber, which is the thing you must not do, or you keep an identifier that now lies
+  about its own subject. If you seed in themed groups for readability, write down explicitly that
+  the grouping was a seeding convenience and that the next entry simply takes the next free
+  identifier.
+
 ## Retiring a source
 
 Retire when the reason you added it stops holding: the direction of travel goes flat, their
 business diverges too far from anything relevant to you, or your own priorities moved. Move the
-entry to a retired section rather than deleting it, so the earlier reasoning survives.
+entry to a retired section rather than deleting it, so the earlier reasoning survives, and it
+keeps its identifier per the rule above.
 
 ## The anti-role-model slot, optional and often empty
 
