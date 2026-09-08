@@ -28,6 +28,7 @@ Agent skills following the `SKILL.md` convention.
 
 | Skill | Entry point | Purpose |
 | --- | --- | --- |
+| board-of-advisors-blueprint | [SKILL.md](skills/board-of-advisors-blueprint/SKILL.md) | Build your own advisor board: lens files with a provenance contract, routing, a four-round debate session protocol |
 | decision-partner | [SKILL.md](skills/decision-partner/SKILL.md) | OOC/EMR-based decision process for personal life and career decisions |
 | error-handling-patterns | [SKILL.md](skills/error-handling-patterns/SKILL.md) | Robust error handling in agent workflows |
 | excalidraw-diagrams | [SKILL.md](skills/excalidraw-diagrams/SKILL.md) | Generate Excalidraw diagrams programmatically |
@@ -35,6 +36,8 @@ Agent skills following the `SKILL.md` convention.
 | investment-decision-toolkit | [SKILL.md](skills/investment-decision-toolkit/SKILL.md) | Cognitive sub-tools for structuring portfolio review: categorization, adversarial review, multi-persona debate, temporal analysis, decision journaling |
 | skill-searcher | [SKILL.md](skills/skill-searcher/SKILL.md) | Find the right skill in a library by semantic match |
 | ui-ux-pro-max | [SKILL.md](skills/ui-ux-pro-max/SKILL.md) | UI/UX reference: style systems, palettes, component patterns |
+
+**board-of-advisors-blueprint references:** [lens-file-format](skills/board-of-advisors-blueprint/references/lens-file-format.md) · [router](skills/board-of-advisors-blueprint/references/router.md) · [session-protocol](skills/board-of-advisors-blueprint/references/session-protocol.md) · [thinking-tools-integration](skills/board-of-advisors-blueprint/references/thinking-tools-integration.md) · [grounding-and-portability](skills/board-of-advisors-blueprint/references/grounding-and-portability.md) · [push-mode-digest](skills/board-of-advisors-blueprint/references/push-mode-digest.md) · [outputs-and-templates](skills/board-of-advisors-blueprint/references/outputs-and-templates.md)
 
 **error-handling-patterns references:** language-specific patterns for [Go](skills/error-handling-patterns/references/go-patterns.md) · [Python](skills/error-handling-patterns/references/python-patterns.md) · [Rust](skills/error-handling-patterns/references/rust-patterns.md) · [TypeScript](skills/error-handling-patterns/references/typescript-patterns.md)
 
