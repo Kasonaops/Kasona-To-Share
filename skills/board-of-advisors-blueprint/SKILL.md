@@ -119,14 +119,14 @@ The long form is in `references/session-protocol.md`. The shape:
 
 ## Related skills in this repository
 
-- `skills/investment-decision-toolkit/` supplies the structured thinking tools this board plugs
-  in: MECE structuring, a prosecutor-style exit case, a pre-mortem with risk triage, temporal
-  triangulation, a decision journal, and six named decision frameworks. See
-  `references/thinking-tools-integration.md` for how to map them onto your own lenses.
-- `skills/decision-partner/` is the OOC/EMR process applied to a single personal decision. A
-  board session and a decision-partner run answer different questions: the board surfaces
-  perspectives you would not have generated alone, the decision partner drives one decision to a
-  resolution. They compose well in that order.
+- `skills/decision-partner/` is the OOC/EMR process applied to a single personal decision, and
+  its `references/` folder carries the two pieces this board's own reference files build on: the
+  six named decision frameworks (including OOC/EMR itself) and a general-purpose decision
+  journal. See `references/thinking-tools-integration.md` for how to map that OOC/EMR overlay,
+  plus a pre-mortem and structured multi-perspective debate, onto your own lenses. A board
+  session and a decision-partner run answer different questions: the board surfaces perspectives
+  you would not have generated alone, the decision partner drives one decision to a resolution.
+  They compose well in that order.
 
 ## Failure modes to design against
 

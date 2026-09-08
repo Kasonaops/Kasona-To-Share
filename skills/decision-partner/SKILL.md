@@ -1,6 +1,6 @@
 ---
 name: decision-partner
-description: A structured decision partner for personal life and career decisions, built on Robbins' OOC/EMR (Outcome, Options, Consequences / Evaluate, Mitigate, Resolve) as the underlying process, with reusable thinking tools from an investment-decision toolkit adapted and plugged in where they fit. Use when someone wants to think through a non-investing decision: a job change, quitting, accepting or declining an offer, moving, starting a course of study, going self-employed, a sabbatical, a relationship or living-situation call, "should I do X or Y," "I'm stuck on a decision," "help me think this through," or "I keep going in circles." Not for portfolio or position decisions, those run through the investing pipeline (see the investment-decision-toolkit skill in this repository).
+description: A structured decision partner for personal life and career decisions, built on Robbins' OOC/EMR (Outcome, Options, Consequences / Evaluate, Mitigate, Resolve) as the underlying process, with reusable thinking tools (a risk pre-mortem, MECE option sorting, a structured multi-perspective debate, past/present/future triangulation) adapted and plugged in where they fit. Use when someone wants to think through a hard decision with no obviously correct answer: a job change, quitting, accepting or declining an offer, moving, starting a course of study, going self-employed, a sabbatical, a relationship or living-situation call, "should I do X or Y," "I'm stuck on a decision," "help me think this through," or "I keep going in circles."
 metadata:
   type: workflow
 ---
@@ -14,20 +14,20 @@ paraphrases of tools that already exist elsewhere.
 
 **Why this skill exists as its own file, rather than folding into an existing one:** a
 reasonable rule for when a new method deserves its own file is that it should overlap less
-than half with something that already exists. This skill doesn't invent a method. It's an
-**orchestration** for a different domain: the underlying tools are written in investing
-language (positions, tickers, portfolios), and that language doesn't automatically carry over
-to a life decision. The OOC/EMR framework itself (see
-`skills/investment-decision-toolkit/references/decision-frameworks.md` in this repository) is
-explicitly the right tool for non-investing decisions. This skill is the adaptation layer that
-makes that concrete.
+than half with something that already exists. This skill doesn't invent a method, it adapts a
+small set of well-known decision-theory tools (see
+[references/decision-frameworks.md](references/decision-frameworks.md) for the full canonical
+writeups, with worked "what a bad application looks like" sections for each) into a single
+walkthrough for a domain those tools don't automatically speak: a personal decision, not a
+professional or financial one.
 
-**Relationship to the investing decision journal:** the decision journal reference in the
-investing toolkit remains the place for straightforward journaling across three modes
-(prepare, reflect, retrospective). This skill doesn't replace it, it provides a stricter
-process for the "prepare" mode specifically, adapted to personal decisions, and writes a
-journal entry at the end in the same spirit. If you just want to reflect or look back on a
-past decision without the full six-step process, go straight to that journal format.
+**Relationship to the general decision journal:**
+[references/decision-journal.md](references/decision-journal.md) in this skill remains the
+place for straightforward journaling across three modes (prepare, reflect, retrospective).
+This skill doesn't replace it, it provides a stricter process for the "prepare" mode
+specifically, adapted to personal decisions, and writes a journal entry at the end in the same
+spirit. If you just want to reflect or look back on a past decision without the full six-step
+process, go straight to that journal format.
 
 ---
 
@@ -413,12 +413,12 @@ further:
 
 | Building block | Origin |
 |---|---|
-| The six-step OOC/EMR process | Tony Robbins, via the investment-decision-toolkit's decision-frameworks reference |
-| Decision quality vs. outcome quality, "Resulting" | Annie Duke, *Thinking in Bets* |
-| Prospective hindsight, "it went wrong, why" | Gary Klein; the same underlying move as Munger's inversion |
-| Tiger / Paper Tiger / Elephant | Adapted from the pre-mortem structure in the investing toolkit's Devil's Advocate reference |
-| Bias checklist basis | Adapted from the exit-review bias check and the assumption-challenging step in the investing decision journal |
-| Option generator, four debate rounds | Adapted from the multi-persona debate reference |
-| Mutually exclusive sorting of options | Adapted from the MECE structuring reference |
-| Three time perspectives, constants and blind spots | Adapted from the temporal triangulation reference |
-| Journal structure, review date, professional-advice constraint | Adapted from the investing decision journal reference |
+| The six-step OOC/EMR process | Tony Robbins, see [references/decision-frameworks.md](references/decision-frameworks.md) §6 |
+| Decision quality vs. outcome quality, "Resulting" | Annie Duke, *Thinking in Bets*, see [references/decision-frameworks.md](references/decision-frameworks.md) §4 |
+| Prospective hindsight, "it went wrong, why" | Gary Klein; the same underlying move as Munger's inversion (§1 of the same reference) |
+| Tiger / Paper Tiger / Elephant | A pre-mortem risk triage: genuinely fatal risks, loud-but-survivable risks, and the concern nobody has named out loud |
+| Bias checklist basis | Standard cognitive-bias literature (sunk cost, confirmation bias, anchoring, and the personal-decision-specific additions in §7) |
+| Option generator, structured multi-perspective debate | Arguing a decision from several genuinely opposed viewpoints, so the option set isn't a straw man |
+| Mutually exclusive, collectively exhaustive sorting of options | MECE structuring, a standard consulting technique |
+| Three time perspectives, constants and blind spots | Checking a belief against its own past, present and future |
+| Journal structure, review date, rejected options, professional-advice constraint | See [references/decision-journal.md](references/decision-journal.md) |

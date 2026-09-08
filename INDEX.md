@@ -29,21 +29,20 @@ Agent skills following the `SKILL.md` convention.
 | Skill | Entry point | Purpose |
 | --- | --- | --- |
 | board-of-advisors-blueprint | [SKILL.md](skills/board-of-advisors-blueprint/SKILL.md) | Build your own advisor board: lens files with a provenance contract, routing, a four-round debate session protocol |
-| decision-partner | [SKILL.md](skills/decision-partner/SKILL.md) | OOC/EMR-based decision process for personal life and career decisions |
+| decision-partner | [SKILL.md](skills/decision-partner/SKILL.md) | OOC/EMR-based decision process for personal life and career decisions, with the canonical decision-frameworks and decision-journal references |
 | error-handling-patterns | [SKILL.md](skills/error-handling-patterns/SKILL.md) | Robust error handling in agent workflows |
 | excalidraw-diagrams | [SKILL.md](skills/excalidraw-diagrams/SKILL.md) | Generate Excalidraw diagrams programmatically |
 | humanizing-text | [SKILL.md](skills/humanizing-text/SKILL.md) | Turn generic AI prose into natural language |
-| investment-decision-toolkit | [SKILL.md](skills/investment-decision-toolkit/SKILL.md) | Cognitive sub-tools for structuring portfolio review: categorization, adversarial review, multi-persona debate, temporal analysis, decision journaling |
 | skill-searcher | [SKILL.md](skills/skill-searcher/SKILL.md) | Find the right skill in a library by semantic match |
 | ui-ux-pro-max | [SKILL.md](skills/ui-ux-pro-max/SKILL.md) | UI/UX reference: style systems, palettes, component patterns |
+
+**decision-partner references:** [decision-frameworks](skills/decision-partner/references/decision-frameworks.md) · [decision-journal](skills/decision-partner/references/decision-journal.md)
 
 **board-of-advisors-blueprint references:** [lens-file-format](skills/board-of-advisors-blueprint/references/lens-file-format.md) · [router](skills/board-of-advisors-blueprint/references/router.md) · [session-protocol](skills/board-of-advisors-blueprint/references/session-protocol.md) · [thinking-tools-integration](skills/board-of-advisors-blueprint/references/thinking-tools-integration.md) · [grounding-and-portability](skills/board-of-advisors-blueprint/references/grounding-and-portability.md) · [push-mode-digest](skills/board-of-advisors-blueprint/references/push-mode-digest.md) · [outputs-and-templates](skills/board-of-advisors-blueprint/references/outputs-and-templates.md)
 
 **error-handling-patterns references:** language-specific patterns for [Go](skills/error-handling-patterns/references/go-patterns.md) · [Python](skills/error-handling-patterns/references/python-patterns.md) · [Rust](skills/error-handling-patterns/references/rust-patterns.md) · [TypeScript](skills/error-handling-patterns/references/typescript-patterns.md)
 
 **excalidraw-diagrams:** [examples](skills/excalidraw-diagrams/examples/) (api-flow, cicd-pipeline, user-registration) · [generators](skills/excalidraw-diagrams/diagrams-workflows/)
-
-**investment-decision-toolkit references:** [mece-structurer](skills/investment-decision-toolkit/references/mece-structurer.md) · [review-meeting-structure](skills/investment-decision-toolkit/references/review-meeting-structure.md) · [devils-advocate](skills/investment-decision-toolkit/references/devils-advocate.md) · [multi-persona-debate](skills/investment-decision-toolkit/references/multi-persona-debate.md) · [temporal-triangulation](skills/investment-decision-toolkit/references/temporal-triangulation.md) · [decision-journal](skills/investment-decision-toolkit/references/decision-journal.md) · [decision-frameworks](skills/investment-decision-toolkit/references/decision-frameworks.md) · [saas-quality-metrics](skills/investment-decision-toolkit/references/saas-quality-metrics.md)
 
 **ui-ux-pro-max:** [cloning_website](skills/ui-ux-pro-max/cloning_website.md) · [antigravity-skills-creator](skills/ui-ux-pro-max/antigravity-skills-creator.md) · `data/` holds the style, palette, typography and stack CSVs · `scripts/` holds the search and design-system helpers
 

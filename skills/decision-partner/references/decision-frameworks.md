@@ -25,11 +25,11 @@ market could drop," "something goes wrong") instead of specific, evidenced ones 
 exact company and this exact decision. Inversion done badly produces the same comfortable
 hand-waving it was meant to prevent.
 
-**Where it attaches:** the natural home is a pre-buy pre-mortem step, exactly this move (see
-[devils-advocate.md](devils-advocate.md) Mode B), which already cites Gary Klein's prospective
-hindsight framing. Munger's inversion and Klein's pre-mortem are the same operation, reached
-from two different traditions (decision theory vs. behavioral psychology), not two different
-frameworks.
+**Where it attaches:** the natural home is a pre-mortem step, before committing to something,
+not after: imagine the failure as a fact and work backward. This is the same move as Gary
+Klein's "prospective hindsight" pre-mortem method. Munger's inversion and Klein's pre-mortem are
+the same operation, reached from two different traditions (decision theory vs. behavioral
+psychology), not two different frameworks.
 
 **On the latticework half:** Munger's broader point, cross-disciplinary mental-model fluency,
 isn't a per-decision checklist item, it's a reasoning style rather than a question with a fast
@@ -41,11 +41,10 @@ that needs closing.
 
 > **A scoping note worth stating up front:** this framework fits better as a lens for
 > analyzing *someone else's* decision (an executive's public commitment, a company's
-> strategic announcement) than for labeling your own trades. Position sizing and buy/sell
-> timing already have their own tools (position-size bands, the 15-reasons-to-sell checklist
-> in [devils-advocate.md](devils-advocate.md)). One-way/two-way doors is most useful applied
-> to decisions you're evaluating from the outside, not decisions you're making about your own
-> portfolio.
+> strategic announcement, a public figure's stated plan) than for labeling a decision you are
+> actively in the middle of, where sizing and timing usually already have their own tools.
+> One-way/two-way doors is most useful applied to decisions you're evaluating from the
+> outside.
 
 **What it asks, in one line:** is the decision under review reversible at low cost (a two-way
 door), or effectively permanent (a one-way door)? Two-way doors deserve speed; one-way doors
@@ -96,13 +95,12 @@ domain, and does that track record earn the weight I'm about to give their view?
   number, or used silently to filter which signals reach the user at all?
 
 **Where it attaches:** if built, this would sit alongside whatever signal-tracking process you
-already run (13F monitoring, analyst-note ingestion, commentator tracking), as the layer that
-tracks those sources against outcomes over time. It's also the honest answer to the "network
-authority" Elephant that a pre-mortem exercise surfaces (see
-[devils-advocate.md](devils-advocate.md) §B.3): *"Are we buying because we did the work, or
-because a source we respect likes it and nobody wants to contradict them?"* Believability
-weighting is the tool that would let that Elephant question be answered with a number instead
-of a gut check, but building it is out of scope until the open questions above are resolved.
+already run (which sources you follow, what they said, when), as the layer that tracks those
+sources against outcomes over time. It's also the honest answer to the "unspoken concern" that a
+pre-mortem exercise is meant to surface: *"Are we doing this because we did the work, or because
+a source we respect likes it and nobody wants to contradict them?"* Believability weighting is
+the tool that would let that concern be answered with a number instead of a gut check, but
+building it is out of scope until the open questions above are resolved.
 
 ## 4. Duke: Decision quality vs. outcome quality ("Resulting")
 
@@ -156,13 +154,10 @@ trade and exiting on a single quarter's noise, which trades away the compounding
 staying in an iterated game for a one-off "win."
 
 **Where it attaches:** the nearest existing kin is a "circle of competence" gate: can you
-explain the business and how it makes money in two plain sentences, without jargon? That
+explain the thing and how it actually works in two plain sentences, without jargon? That
 question is one proxy for specific knowledge, not the whole test; it checks understanding, not
-edge, leverage, or accountability. A management-assessment process that scores a company's own
-skin-in-the-game assesses accountability from the company's side, a related but distinct
-question from whether the investor has accountability. If you screen new candidates before
-deeper analysis, this filter fits best as a pre-screen step there, run before the deeper
-research process opens up.
+edge, leverage, or accountability. If you screen new opportunities before deeper analysis, this
+filter fits best as a pre-screen step there, run before deeper work opens up.
 
 ## 6. Robbins: OOC/EMR (Outcome, Options, Consequences / Evaluate, Mitigate, Resolve)
 
@@ -206,11 +201,8 @@ downside before I commit?"
 a *lens* on one aspect of a decision (invert it, is it reversible, whose opinion counts, was it
 process or luck, do I have edge). OOC/EMR is the *container* those lenses sit in: an end-to-end
 sequence from "what do I want" to "decided." That's why it earns a place here rather than
-replacing anything, and also why it shouldn't be pushed into the position-review pipeline
-described in the main [SKILL.md](../SKILL.md): that pipeline (categorize positions, structured
-review meeting, adversarial analysis, decision journal) is already the investing-specific
-instance of the same shape. OOC/EMR is the general form, and it's the right tool for decisions
-the pipeline doesn't cover: business, product, pricing, personal, or allocation-level choices.
+replacing anything. It's the general form, and it's the right tool for any decision with no
+single obviously correct answer: business, product, pricing, personal, or life choices.
 
 **Where it attaches:**
 
@@ -222,17 +214,16 @@ the pipeline doesn't cover: business, product, pricing, personal, or allocation-
   probabilities, written before the outcome is known) are exactly the record you need later
   to judge decision quality apart from outcome quality. Without them, a retrospective can only
   do "resulting."
-- **A pre-mortem covers step 5 for buy decisions** (see [devils-advocate.md](devils-advocate.md)
-  Mode B): the Tiger/Paper Tiger/Elephant triage is a mitigation pass, and the Paper-Tiger
-  bucket is step 4 (a probability judgment) under a different name. A pre-mortem that never
-  names a mitigation has stopped at step 3.
-- **A multi-persona debate is a step-2 generator** (see
-  [multi-persona-debate.md](multi-persona-debate.md)): personas with opposing philosophies are
-  a reliable way to produce an option set that isn't a straw man.
-- **Non-investing use:** OOC/EMR is the right structural container for personal and career
-  decisions too, run outside the investing-specific pipeline. See
-  `skills/decision-partner/SKILL.md` in this repository for a full walkthrough adapted to that
-  domain.
+- **A pre-mortem covers step 5**: a Tiger/Paper Tiger/Elephant risk triage (genuinely fatal
+  risks, loud-but-survivable risks, and the unspoken concern nobody has named) is a mitigation
+  pass, and the Paper-Tiger bucket is step 4 (a probability judgment) under a different name.
+  A pre-mortem that never names a mitigation has stopped at step 3.
+- **A structured multi-perspective debate is a step-2 generator**: arguing a decision from
+  several genuinely opposed viewpoints is a reliable way to produce an option set that isn't a
+  straw man.
+- **This whole framework is run end to end** in `skills/decision-partner/SKILL.md` in this
+  repository, applied to personal and career decisions, one full walkthrough from outcome to
+  resolve.
 
 ## References
 

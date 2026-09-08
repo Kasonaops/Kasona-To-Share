@@ -125,4 +125,4 @@ your own decision process, and reading a year of them back is the fastest availa
 out where your judgment is systematically off.
 
 For prepare, reflect and retrospective modes of journalling beyond a board session, see
-`skills/investment-decision-toolkit/references/decision-journal.md` in this repository.
+`skills/decision-partner/references/decision-journal.md` in this repository.

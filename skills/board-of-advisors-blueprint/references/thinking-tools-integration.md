@@ -2,23 +2,23 @@
 
 A lens supplies a worldview. It does not supply a method. Left alone, a lens produces opinion in
 a recognisable voice, which is entertaining and thin. The board gets sharper when each lens
-reaches for a real structured tool inside its own territory.
+reaches for a real structured tool inside its own territory, instead of just asserting a view.
 
-This repository already ships those tools. `skills/investment-decision-toolkit/` contains, in its
-`references/` folder:
+Two pieces of this are already written up in this repository and worth reading before you build
+your own version of the rest: `skills/decision-partner/references/decision-frameworks.md` has
+the six named frameworks in full (inversion, one-way versus two-way doors, believability
+weighting, decision quality versus outcome quality, specific knowledge and leverage, and
+Robbins' OOC/EMR, each with a worked "what a bad application looks like" section), and
+`skills/decision-partner/references/decision-journal.md` has prepare, reflect and retrospective
+modes for writing a decision down, including a rejected-options table with revisit triggers.
+`skills/decision-partner/` itself runs OOC/EMR end to end for a single personal decision, which
+is the shortest path to seeing the whole thing work.
 
-| Tool | What it does |
-|---|---|
-| `mece-structurer.md` | Sorts a messy problem into buckets that do not overlap and leave nothing out |
-| `review-meeting-structure.md` | A repeatable agenda for a periodic review session |
-| `devils-advocate.md` | A prosecutor pass: build the strongest case against the thing, including the exit case |
-| `multi-persona-debate.md` | The four-round debate mechanic itself, in generic form |
-| `temporal-triangulation.md` | Checks a thesis against its own past, present and future |
-| `decision-journal.md` | Prepare, reflect and retrospective modes for writing decisions down |
-| `decision-frameworks.md` | Six named frameworks, including inversion, one-way versus two-way doors, believability weighting, and Robbins' OOC/EMR |
-
-`skills/decision-partner/` runs OOC/EMR end to end for a single personal decision. The toolkit's
-language is investing language. Yours probably is not. The mapping below is the adaptation work.
+The rest, a pre-mortem with risk triage, a structured multi-perspective debate, checking a
+thesis against its own past/present/future, and mutually-exclusive option sorting, are standard,
+well-documented techniques you can build directly from their names below. None of them need
+their own file here; the value in this reference is the mapping onto lens territory, not the
+techniques themselves.
 
 ## Mapping tools onto your own advisor domains
 
@@ -44,7 +44,7 @@ interchangeable: a lens keeps its worldview, the tool just gives it a procedure 
 
 ## Risk triage in a pre-mortem
 
-The pre-mortem in the toolkit sorts what came out of it into three kinds of risk, and the sorting
+A pre-mortem sorts what comes out of it into three kinds of risk, and the sorting
 is the whole value:
 
 - **Tiger**: genuinely fatal. It kills the thing. Design against it or do not proceed.
@@ -59,7 +59,7 @@ the thing we are all not saying."
 ## Finding one: lay OOC/EMR over the session
 
 Robbins' OOC/EMR (Outcome, Options, Consequences, then Evaluate, Mitigate, Resolve) is documented
-in `skills/investment-decision-toolkit/references/decision-frameworks.md` and driven end to end in
+in `skills/decision-partner/references/decision-frameworks.md` and driven end to end in
 `skills/decision-partner/`. Laying it over a board session exposes two gaps that almost every
 advisor board has, including well-run ones.
 
@@ -111,17 +111,9 @@ somebody creates a false precision that then propagates silently through every s
 An honest stated judgment can be argued with. A number cannot, it just gets deferred to.
 
 This is a deliberately light version of Dalio's believability weighting as described in
-`skills/investment-decision-toolkit/references/decision-frameworks.md`. That reference sets out
-what a real implementation would require, a stable source identity plus a track record of that
-source's prior calls resolved against outcomes, and lists the honest open questions, chiefly what
-counts as being right, whether the weight is one number or one per domain, and how a track record
-gets built when most commentary never makes a falsifiable claim in the first place. Read it before
-you are tempted to build a scoring system. In a board session you need the judgment, not the
-system.
-
-## Where the debate mechanic itself came from
-
-The four-round structure in `session-protocol.md` is the same mechanic as
-`skills/investment-decision-toolkit/references/multi-persona-debate.md`, generalised from
-investment theses to strategic and personal decisions. If you want the mechanic without the whole
-board, that reference is the shorter path.
+`skills/decision-partner/references/decision-frameworks.md`. That reference sets out what a real
+implementation would require, a stable source identity plus a track record of that source's
+prior calls resolved against outcomes, and lists the honest open questions, chiefly what counts
+as being right, whether the weight is one number or one per domain, and how a track record gets
+built when most commentary never makes a falsifiable claim in the first place. Read it before you
+are tempted to build a scoring system. In a board session you need the judgment, not the system.

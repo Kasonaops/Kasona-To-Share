@@ -40,7 +40,7 @@ Every skill in this repo lives in its own folder and has a file called `SKILL.md
 
 1. Get the skill's `SKILL.md` in front of Claude (any of the three paths above).
 2. Describe your actual situation or question in plain language.
-3. Ask Claude to apply that skill to it, e.g. "use the investment-decision-toolkit's devils-advocate reference to challenge my thesis on [something]" or "walk me through the decision-partner framework for [my decision]."
+3. Ask Claude to apply that skill to it, e.g. "walk me through the decision-partner framework for [my decision]" or "build me an advisor board using the board-of-advisors-blueprint for [my domain]."
 4. Answer the questions Claude asks you. The value of these skills is in the structure, not in any hidden magic, they exist to make sure you (or the AI helping you) do not skip steps that are easy to skip when thinking alone.
 
 ## Questions
