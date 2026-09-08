@@ -6,7 +6,7 @@ This repository contains **only generic, reusable material**. It was deliberatel
 
 > **Internal content does not belong here.** Anything customer-, team- or infrastructure-related lives in `Kasona-Team-Internal`. See [Contributing](#contributing).
 
-See [INDEX.md](INDEX.md) for the full contents.
+See [INDEX.md](INDEX.md) for the full contents. New to GitHub or not sure how to actually use any of this? See [GETTING-STARTED.md](GETTING-STARTED.md), no developer experience required.
 
 Questions, feedback, or ideas for what to share next? Reach out at [hallo@kasona.ai](mailto:hallo@kasona.ai).
 
