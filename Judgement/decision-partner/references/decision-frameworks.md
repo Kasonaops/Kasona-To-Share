@@ -1,7 +1,7 @@
 # Decision Frameworks: Canonical Reference
 
 A single, canonical reference for six named decision-theory frameworks that recur across
-investing literature and across the rest of this toolkit. Some of these are already built
+decision literature and across the rest of the Judgement toolkit. Some of these are already built
 into the other reference files without ever being named explicitly; some are just useful
 lenses worth knowing about even if you haven't built tooling around them yet. This file names
 each one once, states the exact question it forces, shows what a bad application of it looks
@@ -17,11 +17,11 @@ doesn't call them.
 **What it asks, in one line:** instead of asking how to succeed, define failure first and work
 backward from it. "Invert, always invert."
 
-**The question to answer:** "It is {horizon} from now and this position, or this decision, is
+**The question to answer:** "It is {horizon} from now and this decision is
 a disaster. What specifically happened?"
 
 **What a bad application looks like:** generating vague, unfalsifiable causes of failure ("the
-market could drop," "something goes wrong") instead of specific, evidenced ones tied to this
+market could shift," "something goes wrong") instead of specific, evidenced ones tied to this
 exact company and this exact decision. Inversion done badly produces the same comfortable
 hand-waving it was meant to prevent.
 
@@ -39,12 +39,12 @@ that needs closing.
 
 ## 2. Bezos: One-way vs. two-way doors
 
-> **A scoping note worth stating up front:** this framework fits better as a lens for
-> analyzing *someone else's* decision (an executive's public commitment, a company's
-> strategic announcement, a public figure's stated plan) than for labeling a decision you are
-> actively in the middle of, where sizing and timing usually already have their own tools.
-> One-way/two-way doors is most useful applied to decisions you're evaluating from the
-> outside.
+> **A scoping note worth stating up front:** this framework works in two directions. As a lens on *someone else's*
+> decision (an executive's public commitment, a partner's announcement, a public figure's
+> stated plan) it asks how hard they could walk it back. As a lens on *your own* decision it
+> sets the speed: two-way doors deserve a fast try, one-way doors deserve a slow, deliberate
+> pass. Use it on your own decision when reversibility is the real question (a price change,
+> a public position, a hire, a move).
 
 **What it asks, in one line:** is the decision under review reversible at low cost (a two-way
 door), or effectively permanent (a one-way door)? Two-way doors deserve speed; one-way doors
@@ -60,12 +60,11 @@ spin-off filing, a plant broken ground, a resignation announced) as reversible j
 the person saying it could, in principle, change their mind. The framework fails the moment
 door-type is asserted rather than evidenced.
 
-**Where it attaches:** a natural home is an executive-quality or management-assessment
-process, if you run one: it already asks whether a CEO's word matches outcomes, and door-type
-is a missing lens on top of that, distinguishing a broken promise on something reversible from
-a broken promise on something that was never walkable back to begin with. Any place you record
-diligence questions about an executive's public statements is a reasonable place to add "was
-this a one-way or two-way door" as an explicit prompt.
+**Where it attaches:** on your own decision, in the Options and Mitigate steps of OOC/EMR
+(section 6): a one-way door earns a smaller first step or a trial version, a two-way door
+earns a quick attempt. On someone else's commitment, in any assessment of whether a person's
+word matches outcomes: door-type separates a broken promise on something reversible from a
+broken promise on something that was never walkable back to begin with.
 
 ## 3. Dalio: Believability-weighted decision making
 
@@ -78,8 +77,8 @@ domain, and does that track record earn the weight I'm about to give their view?
 
 **What it would need to actually work:** two things most setups don't have in one place:
 
-1. **A source identity**: a stable record of *who* said a given claim (a named fund manager, a
-   named commentator, a named analyst, a named executive), not just the claim itself.
+1. **A source identity**: a stable record of *who* said a given claim (a named expert, a named
+   commentator, a named colleague, a named peer), not just the claim itself.
 2. **That source's track record**: a history of that source's prior calls, resolved against
    what actually happened, in the same domain as the current claim.
 
@@ -87,16 +86,17 @@ domain, and does that track record earn the weight I'm about to give their view?
 
 - What counts as "being right"? A specific, falsifiable price or event call? A directional
   stance? Over what horizon, measured against what benchmark?
-- Is believability one number per source, or does it need to be per-domain (a macro call and a
-  single-stock call from the same person may deserve very different weights)?
-- Most tracked commentary never states a timestamped, falsifiable claim in the first place.
+- Is believability one number per source, or does it need to be per-domain (a pricing call and a
+  hiring call from the same person may deserve very different weights)?
+- Most commentary never states a timestamped, falsifiable claim in the first place.
   How would a track record even get built without asking sources to change what they publish?
 - Where would a believability weight actually change a decision: surfaced to the user as a
   number, or used silently to filter which signals reach the user at all?
 
-**Where it attaches:** if built, this would sit alongside whatever signal-tracking process you
-already run (which sources you follow, what they said, when), as the layer that tracks those
-sources against outcomes over time. It's also the honest answer to the "unspoken concern" that a
+**Where it attaches:** if built, this would sit alongside whatever process you already use to
+follow sources (who you listen to, what they said, when), as the layer that tracks those
+sources against outcomes over time. In the meantime, the light, honest version is a stated
+judgement with reasons, never a score: see `../../board-of-advisors-blueprint/references/thinking-tools-integration.md`. It's also the honest answer to the "unspoken concern" that a
 pre-mortem exercise is meant to surface: *"Are we doing this because we did the work, or because
 a source we respect likes it and nobody wants to contradict them?"* Believability weighting is
 the tool that would let that concern be answered with a number instead of a gut check, but
@@ -105,7 +105,7 @@ building it is out of scope until the open questions above are resolved.
 ## 4. Duke: Decision quality vs. outcome quality ("Resulting")
 
 > **This is arguably the most important framework here.** Most review processes can tell you
-> what you decided and what happened to the position afterward. Almost none can tell you
+> what you decided and what happened afterward. Almost none can tell you
 > whether you had a good process or a good draw, which is the single most important thing a
 > review discipline is supposed to answer.
 
@@ -121,8 +121,8 @@ Duke calls judging a decision by its outcome alone "resulting."
 2. "Separately: how did it actually turn out?" (outcome, judged now)
 
 **What a bad application looks like:** answering only the second question and calling it a
-review. Praising a position that worked out despite a thin, evidence-free thesis ("it worked,
-so it must have been right"), or punishing a well-reasoned, well-evidenced position that lost
+review. Praising a decision that worked out despite thin, evidence-free reasoning ("it worked,
+so it must have been right"), or punishing a well-reasoned, well-evidenced decision that lost
 to a genuinely unforeseeable event. Either mistake teaches the wrong lesson going forward, and
 is exactly what "resulting" produces.
 
@@ -130,34 +130,36 @@ is exactly what "resulting" produces.
 [decision-journal.md](decision-journal.md)) is the closest natural home. It already compares
 original assumptions to actual outcomes, but the useful addition is separating a
 decision-quality verdict from an outcome-quality verdict as two distinct, independently
-answered questions, scored apart rather than just compared. Any quarterly or periodic review
+answered questions, scored apart rather than just compared. Any periodic review
 process you run should ask the process-vs-outcome question directly, as its own field, filled
 in independently of (and ideally before) the outcome field.
 
 ## 5. Naval: Specific knowledge, leverage, and accountability
 
 **What it asks, in one line:** as a filter on *which* bets to take (not how big to size one
-already chosen, and not whether to hold or sell one already owned): do you have specific
+already chosen, and not whether to keep or drop one already running): do you have specific
 knowledge here that can't be easily copied or taught, is the position leveraged so being right
 pays off disproportionately, and are you personally accountable for the call, your name and
-capital on it, not a committee's? Separately: is this an iterated game with this company or
-market, where staying in and compounding matters, or a one-off bet?
+capital on it, not a committee's? Separately: is this an iterated game with this field or
+counterparty, where staying in and compounding matters, or a one-off bet?
 
 **The question to answer:** "Do I actually have an edge here that isn't just access to the
 same information everyone else has, does being right here pay off disproportionately, and
 whose name is on this decision?"
 
 **What a bad application looks like:** mistaking familiarity or enthusiasm for specific
-knowledge, buying a stock because you use and like the product, with no actual edge on the
-business itself. On the long-game half: treating a long-term compounding position as a one-off
-trade and exiting on a single quarter's noise, which trades away the compounding advantage of
+knowledge, starting a venture because you use and like the product category, with no actual
+edge in running one. On the long-game half: treating a long-term compounding effort as a
+one-off and walking away on a single bad month, which trades away the compounding advantage of
 staying in an iterated game for a one-off "win."
 
 **Where it attaches:** the nearest existing kin is a "circle of competence" gate: can you
 explain the thing and how it actually works in two plain sentences, without jargon? That
 question is one proxy for specific knowledge, not the whole test; it checks understanding, not
 edge, leverage, or accountability. If you screen new opportunities before deeper analysis, this
-filter fits best as a pre-screen step there, run before deeper work opens up.
+filter fits best as a pre-screen step there, run before deeper work opens up. A companion
+pre-screen, "is this the next thing, the best version, and affordable right now", lives in
+`../../ports/tools/next-best-affordable.md`.
 
 ## 6. Robbins: OOC/EMR (Outcome, Options, Consequences / Evaluate, Mitigate, Resolve)
 
@@ -221,9 +223,8 @@ single obviously correct answer: business, product, pricing, personal, or life c
 - **A structured multi-perspective debate is a step-2 generator**: arguing a decision from
   several genuinely opposed viewpoints is a reliable way to produce an option set that isn't a
   straw man.
-- **This whole framework is run end to end** in `skills/decision-partner/SKILL.md` in this
-  repository, applied to personal and career decisions, one full walkthrough from outcome to
-  resolve.
+- **This whole framework is run end to end** in `../SKILL.md` (the decision-partner skill),
+  one full walkthrough from outcome to resolve, for any domain you plug in.
 
 ## References
 

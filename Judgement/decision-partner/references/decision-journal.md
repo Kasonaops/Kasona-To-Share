@@ -4,8 +4,9 @@ Acts as a structured reflection partner for decisions. Helps identify assumption
 blind spots, and systematically capture insight for long-term learning. Produces decision
 journal entries meant to be read again later, not just written once and forgotten.
 
-Pair this with whatever trade log or decision record you already keep. The journal entry is
-the reasoning behind an entry in that log, not a replacement for it.
+Pair this with whatever log or decision record you already keep (a project tracker, a CRM, a
+task list). The journal entry is the reasoning behind an entry in that log, not a replacement
+for it.
 
 ## Input
 

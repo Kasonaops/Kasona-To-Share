@@ -5,13 +5,13 @@ a recognisable voice, which is entertaining and thin. The board gets sharper whe
 reaches for a real structured tool inside its own territory, instead of just asserting a view.
 
 Two pieces of this are already written up in this repository and worth reading before you build
-your own version of the rest: `skills/decision-partner/references/decision-frameworks.md` has
+your own version of the rest: `../../decision-partner/references/decision-frameworks.md` has
 the six named frameworks in full (inversion, one-way versus two-way doors, believability
 weighting, decision quality versus outcome quality, specific knowledge and leverage, and
 Robbins' OOC/EMR, each with a worked "what a bad application looks like" section), and
-`skills/decision-partner/references/decision-journal.md` has prepare, reflect and retrospective
+`../../decision-partner/references/decision-journal.md` has prepare, reflect and retrospective
 modes for writing a decision down, including a rejected-options table with revisit triggers.
-`skills/decision-partner/` itself runs OOC/EMR end to end for a single personal decision, which
+`../../decision-partner/` itself runs OOC/EMR end to end for a single decision, which
 is the shortest path to seeing the whole thing work.
 
 The rest, a pre-mortem with risk triage, a structured multi-perspective debate, checking a
@@ -42,6 +42,22 @@ Two things this mapping is not. It is not an instruction to run every tool in ev
 is the same over-firing problem the router exists to prevent. And it is not a way to make lenses
 interchangeable: a lens keeps its worldview, the tool just gives it a procedure to run inside it.
 
+## Choosing the tool: the picker
+
+The shipped picker, one row per question shape, is `../../ports/tools/README.md`. Two tools that
+were not obvious from the mapping table above are worth naming because they change what a
+session should start with:
+
+- **Next, Best, Affordable** (`../../ports/tools/next-best-affordable.md`) is a three-question gate
+  that decides whether a new idea deserves a full session *now*. It sits upstream of OOC/EMR.
+- **Kill review** (`../../ports/tools/kill-review.md`) is the prosecutor pass for something already
+  running, with a defence and a verdict of keep, shrink or retire. It is the exit-case tool the
+  mapping table's skeptic seat is reaching for.
+
+Three rules apply to every tool. Name it out loud when you use it. The shape transfers but the
+content does not, so rewrite buckets, kill reasons and horizons per domain (that is what a domain
+plug is for). And use one tool per question, usually: tools stack badly.
+
 ## Risk triage in a pre-mortem
 
 A pre-mortem sorts what comes out of it into three kinds of risk, and the sorting
@@ -59,8 +75,8 @@ the thing we are all not saying."
 ## Finding one: lay OOC/EMR over the session
 
 Robbins' OOC/EMR (Outcome, Options, Consequences, then Evaluate, Mitigate, Resolve) is documented
-in `skills/decision-partner/references/decision-frameworks.md` and driven end to end in
-`skills/decision-partner/`. Laying it over a board session exposes two gaps that almost every
+in `../../decision-partner/references/decision-frameworks.md` and driven end to end in
+`../../decision-partner/`. Laying it over a board session exposes two gaps that almost every
 advisor board has, including well-run ones.
 
 **Gap 1: the board debates options and consequences, but never ranks the decider's outcomes
@@ -83,7 +99,9 @@ And record the estimate, so that when you revisit the decision you can see wheth
 systematically too worried or not worried enough.
 
 Both passes are cheap. Together they are the difference between a debate that entertains and a
-decision process that converges.
+decision process that converges. Both are built into the session protocol now (the outcome
+ranking in step 1, the probability pass at the start of step 7 in `session-protocol.md`), so you
+do not have to remember to add them. They are described here so you can see why they exist.
 
 ## Finding two: weighting evidence from a watched operator
 
@@ -111,7 +129,7 @@ somebody creates a false precision that then propagates silently through every s
 An honest stated judgment can be argued with. A number cannot, it just gets deferred to.
 
 This is a deliberately light version of Dalio's believability weighting as described in
-`skills/decision-partner/references/decision-frameworks.md`. That reference sets out what a real
+`../../decision-partner/references/decision-frameworks.md`. That reference sets out what a real
 implementation would require, a stable source identity plus a track record of that source's
 prior calls resolved against outcomes, and lists the honest open questions, chiefly what counts
 as being right, whether the weight is one number or one per domain, and how a track record gets

@@ -63,7 +63,10 @@ one place, clearly lower-confidence.
 
 ## The template
 
-Copy this into `advisors/_template-lens.md` and duplicate it per lens.
+Copy this into `advisors/_template-lens.md` and duplicate it per lens. In the Judgement toolkit a
+lens is a plug: the ready-to-copy version, with the plug frontmatter, is
+`../../ports/lens/_template.md`, and two role lenses (a skeptic seat and a customer seat) ship
+with it as worked examples. To activate a lens, add a row for it in `../../PLUGGED-IN.md`.
 
 ```markdown
 # {Name} Lens, {core work or source}

@@ -4,6 +4,10 @@ Your board folder should work in a plain chat window with no tools connected, an
 not different, when you plug in the sources you actually have. That means grounding is a pointer
 layer you supply, never something baked into the skill.
 
+In the Judgement toolkit each grounding source is a **context plug**. The ready-to-copy version
+is `../../ports/context/_template.md`, activated with a row in `../../PLUGGED-IN.md`. The
+pointer-file pattern below is the same idea in a single file.
+
 ## The pointer file pattern
 
 Keep one small file, `grounding.md`, that names your grounding sources in **one line each**: what

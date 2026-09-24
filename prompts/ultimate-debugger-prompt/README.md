@@ -2,6 +2,8 @@
 
 ![DALL·E 2024-07-24 17 14 32 - A sleek, modern 16x9 image representing a debugging prompt for GitHub  The image features a dark theme with code snippets, a magnifying glass focusing](https://github.com/user-attachments/assets/bf48c21a-7200-441d-b18b-57bf81255627)
 
+> **How to use it, in three steps:** open [prompt.txt](prompt.txt), copy all of it into a new Claude chat, and replace the placeholders (your code, your error message, what you were trying to do). Send. More help: [GETTING-STARTED.md](../../GETTING-STARTED.md).
+
 Welcome to the Ultimate Debugging Prompt for Claude! This sophisticated and carefully engineered prompt is designed to streamline and enhance your debugging process when working with Claude 3.5 Sonnet. 
 
 ## Prompt Structure

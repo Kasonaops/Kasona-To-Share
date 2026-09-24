@@ -2,6 +2,16 @@
 
 A pattern for turning a codebase, service description, brand assets and website into animated videos automatically, using [Remotion](https://github.com/remotion-dev/remotion) (React-based video framework) driven by Claude Code.
 
+> **Not a developer? You do not need to read the rest of this page. Claude does.**
+>
+> 1. Get **Claude Code** (the Code tab in the Claude desktop app, see [claude.com/claude-code](https://claude.com/claude-code)). The browser version of Claude cannot do this, because it has to create files and render video on your computer.
+> 2. Create an empty folder, for example `my-videos`, and open it in Claude Code.
+> 3. Paste this, with your own details in the brackets:
+>
+>    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/remotion-video-generation.md. Set it up for me in this folder, step by step. My product is [what it does, in one sentence], my website is [link], and my audience is [who watches]. Before installing anything, tell me what you will install and why. Then make one short test video of about 20 seconds.*
+>
+> Claude will ask before installing anything (usually Node.js), ask you for your logo and colours, and hand you a video file at the end. More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
+
 ## Optional add-ons
 
 - **Voiceover:** any TTS provider with a stable voice ID and API key (e.g. ElevenLabs)
