@@ -4,6 +4,13 @@ A modular toolkit for thinking through decisions that have no obviously correct 
 for any domain: a career move, a pricing change, a product bet, a hire, a creative direction, a
 family or living-situation call.
 
+> **How to use this without any technical knowledge.** Open Claude (the normal chat works) and
+> paste: *Read the Judgement toolkit at https://github.com/Kasonaops/Kasona-To-Share/tree/main/Judgement,
+> start with its README, and use the decision-partner to walk me through this decision step by
+> step: [your situation in two or three sentences]. Ask me one question at a time.* That is it.
+> If Claude cannot open the link, download the folder and drag it into the chat. Step by step:
+> [GETTING-STARTED.md](../GETTING-STARTED.md).
+
 ## Built at Kasona Wealth Intelligence, proven on investments
 
 At [Kasona Wealth Intelligence](https://kasona.ai) we help investors make better portfolio decisions. Good investing is mostly good judgement: a ranked goal, real alternatives, honest probabilities, a pre-mortem before you commit, and a written record you can learn from later. So we built exactly this process into our product and combined it with our own data infrastructure (market data, research pipelines and portfolio data), which lets the same structured thinking run on live investment questions instead of a blank page.

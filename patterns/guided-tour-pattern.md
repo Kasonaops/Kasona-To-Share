@@ -2,6 +2,8 @@
 
 A concept guide for building an interactive product tour like the ones found on modern SaaS dashboards: the screen dims, one UI element stays highlighted in a "spotlight", and a small explanation card walks the user through the app step by step.
 
+> **Not a developer?** Open the folder with your app's code in **Claude Code** and paste: *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/guided-tour-pattern.md and build a first-visit guided tour for this app with five steps. Show me the steps as a list before you write any code.* More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
+
 This document describes the **idea and the building blocks**, not a finished implementation. It is framework-agnostic — the snippets are illustrative pseudocode/JS and can be adapted to React, Vue, vanilla JS, or anything else.
 
 ---

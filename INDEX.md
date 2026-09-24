@@ -2,6 +2,8 @@
 
 Every document in this repository. Regenerate when adding content.
 
+**Not technical?** You do not need to read these files. Paste a file's link into Claude and say what you want. Methods, skills and prompts work in any Claude. Patterns and plugins need **Claude Code**, because they build things on your computer. Copy-paste sentences: [GETTING-STARTED.md](GETTING-STARTED.md).
+
 ## Root
 
 | File | Purpose |
@@ -70,10 +72,10 @@ A modular toolkit for thinking through decisions with no obviously correct answe
 
 Framework-agnostic implementation patterns. Concept guides, not libraries.
 
-| Pattern | Purpose |
-| --- | --- |
-| [guided-tour-pattern](patterns/guided-tour-pattern.md) | Interactive onboarding walkthrough: spotlight overlay, step data model, persistence |
-| [remotion-video-generation](patterns/remotion-video-generation.md) | Turn a codebase, service description and brand assets into automated videos with Remotion + Claude Code |
+| Pattern | Purpose | Needs |
+| --- | --- | --- |
+| [guided-tour-pattern](patterns/guided-tour-pattern.md) | Interactive onboarding walkthrough: spotlight overlay, step data model, persistence | Claude Code, opened in your app's code folder |
+| [remotion-video-generation](patterns/remotion-video-generation.md) | Turn a codebase, service description and brand assets into automated videos with Remotion + Claude Code | Claude Code, opened in an empty folder. Claude installs Node.js if missing, after asking |
 
 ## `prompts/`
 

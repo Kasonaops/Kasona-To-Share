@@ -1,48 +1,131 @@
-# Getting Started (No GitHub Experience Needed)
+# Getting Started (no coding, no GitHub experience needed)
 
-This page is for anyone who wants to use what is in this repository but has never used GitHub before. You do not need to know git, the command line, or any developer tools to get value out of this. Pick whichever of the three paths below sounds easiest to you.
+Everything in this repository is a set of instructions **for Claude**, not for you. You never have
+to read the technical parts. Your job is to get the right file in front of Claude and tell it, in
+plain language, what you want. Claude reads the file and does the rest.
 
-## Path 1: Download and drag in (fastest, zero setup)
+This page tells you exactly what to click and what to type.
 
-1. On this repository's GitHub page, click the green **Code** button near the top.
-2. Click **Download ZIP**.
-3. Unzip the file on your computer, you now have a normal folder.
-4. Open Claude:
-   - In **Claude Code**: drag the folder (or the specific folder you want. For decision work, take the whole `Judgement` folder: its two skills share the plug-in ports, so they belong together) into your project, or just tell Claude in the chat "read the SKILL.md in this folder and use it" and point it at the unzipped location.
-   - In **Claude.ai with Cowork**: drag the folder into the chat, or upload the files you want. Tell Claude what you want to do with them, for example "use the decision-partner skill on my situation."
-5. That's it. Claude reads the file and follows its instructions for the rest of that conversation.
+---
 
-You can also just download a single file instead of the whole ZIP: open the file on GitHub, click the **Raw** button (or the download icon), and save it. Works exactly the same.
+## Step 1: What kind of thing are you looking at?
 
-## Path 2: Connect GitHub to Claude (no downloading, always up to date)
+There are four kinds of things in here. The folder a file lives in tells you which one it is.
 
-If you already have, or are willing to create, a free GitHub account:
+| Folder | What it is, in plain words | What you need | Can Claude.ai in the browser do it? |
+| --- | --- | --- | --- |
+| `Judgement/` and `skills/` | A **method**. Claude follows a proven step-by-step process with you, for example to think through a hard decision | Any Claude account | Yes |
+| `patterns/` | A **recipe for building something**, for example a machine that turns your product into animated videos | **Claude Code**, because Claude creates real files and runs programs on your computer | No, you need Claude Code |
+| `prompts/` | A **ready-made text** you copy into a chat and fill in | Any Claude account | Yes |
+| `plugins/` | An **add-on for Claude Code** | Claude Code | No |
 
-1. Create a GitHub account at [github.com](https://github.com) if you do not have one (free, takes a minute, just an email and a password).
-2. In Claude, go to **Settings > Connectors** (or **Connectors** in the sidebar, depending on where you are using Claude).
-3. Find **GitHub** in the list and connect it. This asks you to log into your GitHub account and approve the connection, you do this once.
-4. Once connected, give Claude this repository's link in the chat and ask it to use a specific skill or pattern from it, for example: "Look at the decision-partner skill in [this repo link] and help me think through [your situation]."
-5. Claude fetches the file directly through the connection, no download needed. This is the easiest way to always get the current version, since the repository may be updated over time.
+**What is Claude Code?** The version of Claude that can work inside a folder on your computer:
+create files, install tools and run them, always asking you before it does something. The easiest
+way to get it is the **Code** tab in the Claude desktop app. See
+[claude.com/claude-code](https://claude.com/claude-code) for download and setup. You need a paid
+Claude plan for it.
 
-## Path 3: Clone it with git (for developers)
+---
 
-If you are comfortable with git:
+## Step 2: Give it to Claude
+
+This repository is public, so the fastest way is to **paste the link**. No download, no GitHub
+account.
+
+### Option A: Paste the link (easiest)
+
+1. Open the file you want on GitHub and copy the address from your browser's address bar.
+2. Open Claude (Claude Code for `patterns/` and `plugins/`, any Claude for the rest).
+3. Paste one of the sentences from Step 3 below, with the link in it.
+
+If Claude says it cannot open the link, use Option B.
+
+### Option B: Download and drag in
+
+1. On the repository's main page on GitHub, click the green **Code** button, then **Download ZIP**.
+2. Double-click the ZIP to unzip it. You now have a normal folder.
+3. **Claude Code:** open the folder you want to work in, then drag the unzipped folder (or just the
+   one you need, for example `Judgement`) into it. **Claude.ai:** drag the files into the chat.
+4. Paste one of the sentences from Step 3.
+
+To grab a single file instead of the whole ZIP: open the file on GitHub, click **Raw**, and save the
+page (Cmd+S on Mac, Ctrl+S on Windows).
+
+### Option C: Connect GitHub (stays up to date)
+
+In Claude, open **Settings, then Connectors**, connect **GitHub**, and approve the login once.
+After that Claude can read the repository directly whenever you mention it.
+
+---
+
+## Step 3: Copy one of these sentences
+
+Replace the part in `[brackets]` with your own words. That is all the "programming" there is.
+
+### A hard decision (Judgement toolkit, any Claude)
+
+> Read the Judgement toolkit at https://github.com/Kasonaops/Kasona-To-Share/tree/main/Judgement,
+> start with its README, and use the decision-partner to walk me through this decision step by
+> step: [describe your situation in two or three sentences]. Ask me one question at a time.
+
+Want several viewpoints arguing first? Swap the last part for: "use the board-of-advisors-blueprint
+to help me set up a small advisor board for [your field] and run one session on [your question]."
+
+### Automated videos from your product (Remotion pattern, Claude Code only)
+
+1. In Claude Code, open an **empty folder** for the project (create a new one, for example
+   `my-videos`).
+2. Paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/remotion-video-generation.md
+> Set it up for me in this folder, step by step. My product is [what it does, in one sentence],
+> my website is [link], and my audience is [who watches]. Before installing anything, tell me
+> what you will install and why. Then make one short test video of about 20 seconds.
+
+What happens next: Claude checks what is missing on your computer (for Remotion that is usually
+Node.js), asks before installing it, builds the folder structure from the pattern, asks you for your
+logo and brand colours, and renders a first video file you can open. Plan roughly an hour for the
+first video, most of it answering Claude's questions.
+
+### An onboarding tour for your web app (guided-tour pattern, Claude Code only)
+
+Open the folder that contains your app's code in Claude Code, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/guided-tour-pattern.md
+> and build a first-visit guided tour for this app with five steps. Show me the steps as a list
+> before you write any code.
+
+### A ready-made prompt (prompts folder, any Claude)
+
+Open the prompt's folder, copy the text from `prompt.txt`, paste it into a new chat, and fill in the
+parts in capital letters.
+
+### Any other skill (any Claude)
+
+> Read the skill at [link to its SKILL.md] and use it on this: [your situation or question].
+
+---
+
+## Step 4: What to expect
+
+- Claude will ask you questions. Answer them. The value of these files is the structure: they make
+  sure no important step is skipped.
+- In Claude Code, Claude asks for permission before it creates files or installs anything. Read the
+  request and click allow if it makes sense to you. If you are unsure, ask Claude "what does this do
+  and is it safe?" before allowing.
+- Nothing here sends your data anywhere by itself. You decide what you share with Claude.
+
+## Stuck?
+
+Tell Claude exactly what you see, for example "it says command not found" or "nothing happened
+after I clicked allow". It can almost always fix it. If something in this guide does not work the
+way it is described, reach out at [hallo@kasona.ai](mailto:hallo@kasona.ai).
+
+## For developers
 
 ```bash
 git clone https://github.com/Kasonaops/Kasona-To-Share.git
 ```
 
-Then reference any `SKILL.md` file directly in your own agent setup, copy a `skills/` folder into your own skills directory, or point Claude Code at the local path.
-
-## What to actually do once you have a skill
-
-Every skill in this repo lives in its own folder and has a file called `SKILL.md`. That file tells Claude (or another AI agent) what the skill does and when to use it, you do not need to read or understand the technical parts yourself. The simplest way to use one:
-
-1. Get the skill's `SKILL.md` in front of Claude (any of the three paths above).
-2. Describe your actual situation or question in plain language.
-3. Ask Claude to apply that skill to it, e.g. "walk me through the decision-partner framework for [my decision]" or "build me an advisor board using the board-of-advisors-blueprint for [my domain]."
-4. Answer the questions Claude asks you. The value of these skills is in the structure, not in any hidden magic, they exist to make sure you (or the AI helping you) do not skip steps that are easy to skip when thinking alone.
-
-## Questions
-
-If something in this guide does not work the way it is described, or you get stuck, reach out at [hallo@kasona.ai](mailto:hallo@kasona.ai).
+Copy a skill folder into your skills directory, point your agent at a `SKILL.md`, or install a
+plugin from `plugins/`.
