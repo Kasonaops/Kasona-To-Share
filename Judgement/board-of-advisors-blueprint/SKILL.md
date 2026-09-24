@@ -1,6 +1,6 @@
 ---
 name: board-of-advisors-blueprint
-description: A blueprint for building your own personal board of advisors, a folder of simulated thinker lenses you consult on hard decisions, a separate list of real operators you watch but never simulate, and a bridge to the real humans you actually report to. Use when someone wants to build an advisor board, a persona debate setup, a "what would X say about this" system, or a structured way to pressure-test a decision that has no obviously correct answer, and wants the file structure, the provenance rules, the routing logic and the session protocol rather than a one-off answer. Also use when an existing persona setup keeps producing confident-sounding opinions that nobody can trace back to a source.
+description: A blueprint for building your own personal board of advisors, a folder of simulated thinker lenses you consult on hard decisions, a separate list of real operators you watch but never simulate, and a bridge to the real humans you actually report to. Use when someone wants to build an advisor board, a persona debate setup, a "what would X say about this" system, or a structured way to pressure-test a decision that has no obviously correct answer, and wants the file structure, the provenance rules, the routing logic and the session protocol rather than a one-off answer. Also use when an existing persona setup keeps producing confident-sounding opinions that nobody can trace back to a source. Modular by design: lenses, grounding sources, a domain pack, extra thinking tools and the shape of the output are all plugs (see the Judgement folder's ports).
 ---
 
 # Board of Advisors Blueprint
@@ -12,6 +12,29 @@ information instead of from vibes.
 
 This is a blueprint, not a finished board. You supply the thinkers, the domain, and the
 grounding sources. Everything here is the scaffolding around them.
+
+## How this fits the Judgement ports
+
+This blueprint is one of two engines in the `Judgement/` folder. What you build with it is not a
+monolith: each part of your board is a plug that can be swapped without touching the rest.
+
+| Part of your board | Port | Plug format and shipped examples |
+|---|---|---|
+| `advisors/` | lens | [../ports/lens/_template.md](../ports/lens/_template.md), plus a skeptic seat and a customer seat |
+| `grounding.md` | context | [../ports/context/_template.md](../ports/context/_template.md) |
+| Domain vocabulary, horizons, hard limits | domain | [../ports/domain/](../ports/domain/) |
+| Thinking methods a lens can reach for | tools | [../ports/tools/README.md](../ports/tools/README.md) |
+| Synthesis, briefing, journal entry | output | [../ports/output/](../ports/output/) |
+
+**Plug check, first step of every session.** Read [../PLUGGED-IN.md](../PLUGGED-IN.md), load
+what is active, and state in one line what is plugged in and what fell back to a default. A
+missing plug is named, never pretended. Plugs add, they never remove a ground rule or drop a
+never-drop field of the Decision Record ([../ports/README.md](../ports/README.md)).
+
+**Which engine.** A board session surfaces perspectives you would not have generated alone. To
+drive one decision that is yours (your own time, career, household) to a dated resolution, use
+[../decision-partner/SKILL.md](../decision-partner/SKILL.md). For business, product, offer,
+content and team questions, start here and finish there.
 
 ## What you end up with
 
@@ -91,9 +114,14 @@ accordingly.
 
 The long form is in `references/session-protocol.md`. The shape:
 
-0. **Route.** Which lens or lenses does this question actually need? Usually one or two.
+P. **Plug check.** Read the manifest, state what is plugged in, name any fallback.
+0. **Route.** Which lens or lenses does this question actually need, and which thinking tool, if
+   a tool would answer it better than a debate? Usually one or two lenses, often one lens plus
+   one tool.
 1. **Frame.** Restate the question in two parts: the facts you were given, and the assumptions
-   buried in how it was framed. Name any visible lean.
+   buried in how it was framed. Name any visible lean. Then **rank the outcomes**: what should be
+   true at the end, in order, each with its why. Without a ranking the lenses argue toward
+   different goals and the synthesis silently picks one for you.
 2. **Confirm the roster.** State the chosen lenses and why, in one line each, before anyone
    speaks.
 3. **Information gaps.** Each lens names the one thing that would actually move its answer. Close
@@ -102,7 +130,10 @@ The long form is in `references/session-protocol.md`. The shape:
 5. **Round 2, rebuttal**, including the forced-dissent rule.
 6. **Round 3, defence.**
 7. **Round 4, synthesis**: recommendation, consensus, dissent, kill-criteria, next steps, blind
-   spots, remaining open gaps.
+   spots, remaining open gaps. Before writing the recommendation, run a **probability pass** on
+   the two or three consequences that actually carry it: how likely, and on what basis. A lens
+   may argue around an honestly stated uncertainty. It may never assert a probability it made
+   up.
 8. **Stay in session.** The synthesis is not the end of the conversation.
 
 ## Reference files
@@ -115,12 +146,13 @@ The long form is in `references/session-protocol.md`. The shape:
 | [thinking-tools-integration.md](references/thinking-tools-integration.md) | Plugging structured decision tools into each lens's territory, the OOC/EMR overlay, weighting evidence |
 | [grounding-and-portability.md](references/grounding-and-portability.md) | The pointer-file pattern, the fallback rule, keeping the folder safe to share |
 | [push-mode-digest.md](references/push-mode-digest.md) | The optional watched-operator digest loop and its human gate |
-| [outputs-and-templates.md](references/outputs-and-templates.md) | Real-advisor briefing template, decision journal entry template |
+| [outputs-and-templates.md](references/outputs-and-templates.md) | Real-advisor briefing template, decision journal entry template, how they map to output plugs |
+| [../ports/README.md](../ports/README.md) | The plug contract, the Decision Record, and how to add your own plug |
 
 ## Related skills in this repository
 
-- `skills/decision-partner/` is the OOC/EMR process applied to a single personal decision, and
-  its `references/` folder carries the two pieces this board's own reference files build on: the
+- [`../decision-partner/`](../decision-partner/SKILL.md) is the OOC/EMR process applied to a
+  single decision, in any domain, and its `references/` folder carries the two pieces this board's own reference files build on: the
   six named decision frameworks (including OOC/EMR itself) and a general-purpose decision
   journal. See `references/thinking-tools-integration.md` for how to map that OOC/EMR overlay,
   plus a pre-mortem and structured multi-perspective debate, onto your own lenses. A board
@@ -130,6 +162,13 @@ The long form is in `references/session-protocol.md`. The shape:
 
 ## Failure modes to design against
 
+- Defaulting to the debate when a single named tool would answer it better: a pre-mortem before
+  a commitment, a kill review on something already running, a MECE pass on a tangled option set.
+  Say out loud which tool you are running (see `../ports/tools/README.md`).
+- Running a debate without ranking the outcomes first. The lenses argue toward different goals
+  and the synthesis picks a winner without saying so.
+- Asserting a probability nobody has a basis for. An invented number survives the session and
+  gets quoted back as evidence.
 - Firing the whole board at a question one lens could answer alone. Cost goes up, the synthesis
   gets blurrier, and you learn less.
 - A lens file with no blind-spot section. The synthesis round has nothing to correct for and

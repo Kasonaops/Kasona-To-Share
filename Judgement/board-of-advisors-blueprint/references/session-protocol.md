@@ -5,10 +5,20 @@ debate argue from something real rather than from whatever happened to be in con
 only for a genuinely small single-lens question where nothing would be gained, and skip them
 deliberately rather than by forgetting.
 
+## Step P: Plug check
+
+Read `../../PLUGGED-IN.md`, load every active plug, and state in one line what is plugged in and
+what fell back to a default. A missing lens plug means the board asks you to write one first,
+because inventing a persona from general knowledge breaks the provenance contract. A missing
+context plug means every information gap will be logged as open. A missing domain plug means
+generic horizons and generic bias examples.
+
 ## Step 0: Route
 
-Pick the lens or lenses. See `router.md`. State the choice and the reason in one line before
-anything else happens.
+Pick the lens or lenses **and the tool**. See `router.md`. Many questions need one lens plus one
+named tool (a pre-mortem, a kill review, a MECE pass), not a debate. State the choice and the
+reason in one line before anything else happens, and say out loud which tool you are running.
+Run the full debate only for a genuine strategic fork.
 
 ## Step 1: Framing
 
@@ -25,6 +35,16 @@ This is the board's own opening move, done once, before any worldview enters the
 a lens's job, because a lens will read the framing through its own priors and will not see the
 frame as a frame. Most bad board sessions are traceable to a frame nobody examined: the lenses
 argue brilliantly inside a question that should not have been asked in that shape.
+
+**Then rank the outcomes, in the same breath.** Framing surfaces a lean. This makes explicit what
+the lean is serving. Ask what should be true at the end and put the answers in order, with the
+why attached to each: "as I read it, number one is keeping the week free for the product, number
+two is not losing the two customers who asked for it, number three is the revenue. Right order?"
+Two or three outcomes is usually the whole list. Keep it conversational: a sentence the person
+confirms or corrects, not a form. The ranking matters because two lenses arguing for different
+outcomes cannot be compared. If they genuinely cannot rank the outcomes, that is itself the
+finding, and the session is about the ranking, not the options. If their own answer is vague,
+pull the future-retrospective question from `../../ports/tools/sharp-questions.md`.
 
 ## Step 2: Confirm the roster
 
@@ -89,7 +109,20 @@ louder.
 
 ## Step 7: Round 4, synthesis
 
-Produce all seven of these explicitly. A synthesis that is only a blended position is not a
+**Probability pass first, attached before you write the recommendation, not after.** The lenses
+argued consequences in rounds 1 to 3. Consequences without probabilities are theatre: a vivid
+tail risk gets treated as the base case simply because it was argued well. Go back over the two
+or three consequences that actually carry the recommendation and say, for each, how likely it is
+and on what basis. **A lens may argue around an honestly stated uncertainty. It may never assert
+a probability it made up.** "This happens to most people who try it, and here is why I think
+that" is fine. "I do not know how often this happens, and if it is common the position collapses"
+is fine and is often the more useful answer. A bare "roughly 30 percent" with nothing behind it
+is not calibration, it is a number that gets quoted back later as if somebody had counted
+something. Use plain words (likely, rare, no basis for this) and say which. Where a real figure
+exists in a grounding source, cite it and name the source. If a probability judgement changed the
+recommendation, say so in the synthesis.
+
+Then produce all seven of these explicitly. A synthesis that is only a blended position is not a
 synthesis, it is an average.
 
 1. **Recommendation.** The most robust position, stated plainly, as an action.
@@ -114,12 +147,26 @@ as the session runs.
 
 Close only when the person says they are done, or the conversation visibly moves on.
 
+## Where the session lives inside OOC/EMR
+
+The whole session is an OOC/EMR run (see `../../decision-partner/references/decision-frameworks.md`
+section 6): the outcome ranking is step 1, the lenses generate the options and their consequences
+in steps 2 and 3, the probability pass is step 4, the recommendation and kill-criteria are step 5
+(mitigate), and step 6, resolve, is the person's, never the board's.
+
 ## Optional endings
 
-- **A real-advisor briefing**, if the decision is headed to an actual human. See
-  `outputs-and-templates.md`. Never hand over a simulated answer in a real person's name.
-- **A decision journal entry**, for a call worth revisiting later. See `outputs-and-templates.md`.
-  Plain markdown, one file per decision. Do not build a database for it.
+Both are output plugs, rendered from the Decision Record (`../../ports/README.md`). Pick the one
+you need, or several.
+
+- **A real-advisor briefing**, if the decision is headed to an actual human
+  (`../../ports/output/real-advisor-briefing.md`). Never hand over a simulated answer in a real
+  person's name.
+- **A decision journal entry**, for a call worth revisiting later
+  (`../../ports/output/decision-journal-entry.md`). Plain markdown, one file per decision. Do not
+  build a database for it.
+- **A one-page memo or a chat summary**, for people who were not in the room
+  (`../../ports/output/one-page-memo.md`, `../../ports/output/chat-summary.md`).
 
 ## Quality bar for a run
 
@@ -127,4 +174,6 @@ Close only when the person says they are done, or the conversation visibly moves
 - Every information gap either closed with a real source or logged as open, never invented.
 - Blind spots named for every lens used.
 - The synthesis says something more useful than "it depends."
+- The outcomes were ranked before any lens spoke, and every consequence carrying the
+  recommendation has a stated probability or an honestly stated uncertainty.
 - The most developed lens file did not win by default just because it had the most material.

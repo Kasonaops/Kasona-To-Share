@@ -64,6 +64,30 @@ when you pull that in:
 See `push-mode-digest.md` and, for how much weight that evidence should carry,
 `thinking-tools-integration.md`.
 
+## Which thinking tool, not just which lens
+
+A lens is not limited to the debate. Route the tool as well as the voice. The generic picker,
+with every shipped tool and where it lives, is `../../ports/tools/README.md`. In short:
+
+| Question shape | Tool | Which lens runs it |
+|---|---|---|
+| "Should we kill, shrink or retire X" where X already exists and runs | Kill review, prosecutor pass with the fifteen reasons | The lens that owns X's domain |
+| "Should we commit to X": a build, launch, price change, hire, partnership | Pre-mortem with Tiger, Paper Tiger, Elephant triage. The most transferable tool: it needs only a commitment and a horizon | Any lens. Reach for it before a full debate |
+| "Which of these, and did we miss one" with a long or overlapping option set | MECE sorting, buckets rewritten for the domain | The lens that owns the domain |
+| "Should we still be doing it this way": direction, not execution | Temporal triangulation, three epochs | A craft or long-horizon lens |
+| A new idea shows up and the question is whether to act on it *now* | Next, Best, Affordable, run before the idea enters a session | Any lens. It is a gate, not a voice |
+| Two watched operators point in different directions | Believability weighting, stated out loud, never scored | The lens still supplies the judgement |
+| Reversibility is the real question | One-way versus two-way doors | Any lens. Often no lens owns it, so reach for it explicitly |
+| A genuine strategic fork with no clearly correct answer | The four-round debate | Three lenses |
+
+The whole session sits inside OOC/EMR regardless of which row applies: ranked outcomes first,
+probabilities on the consequences before the recommendation.
+
+**Two decision types, two engines.** A question about the person's own time, identity, career or
+household belongs to `../../decision-partner/SKILL.md`. A question about a business, product,
+offer, audience or team belongs here. If a question is genuinely both, run the board first to
+surface perspectives, then the decision partner to drive the decision to a date.
+
 ## Recording the routing decision
 
 Even for a single-lens answer, state which lens you picked and why, in one line. Two reasons: it

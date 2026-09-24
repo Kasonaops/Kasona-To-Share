@@ -8,7 +8,7 @@ This page is for anyone who wants to use what is in this repository but has neve
 2. Click **Download ZIP**.
 3. Unzip the file on your computer, you now have a normal folder.
 4. Open Claude:
-   - In **Claude Code**: drag the folder (or the specific skill folder you want, e.g. `skills/decision-partner`) into your project, or just tell Claude in the chat "read the SKILL.md in this folder and use it" and point it at the unzipped location.
+   - In **Claude Code**: drag the folder (or the specific folder you want. For decision work, take the whole `Judgement` folder: its two skills share the plug-in ports, so they belong together) into your project, or just tell Claude in the chat "read the SKILL.md in this folder and use it" and point it at the unzipped location.
    - In **Claude.ai with Cowork**: drag the folder into the chat, or upload the files you want. Tell Claude what you want to do with them, for example "use the decision-partner skill on my situation."
 5. That's it. Claude reads the file and follows its instructions for the rest of that conversation.
 

@@ -28,23 +28,43 @@ Agent skills following the `SKILL.md` convention.
 
 | Skill | Entry point | Purpose |
 | --- | --- | --- |
-| board-of-advisors-blueprint | [SKILL.md](skills/board-of-advisors-blueprint/SKILL.md) | Build your own advisor board: lens files with a provenance contract, routing, a four-round debate session protocol |
-| decision-partner | [SKILL.md](skills/decision-partner/SKILL.md) | OOC/EMR-based decision process for personal life and career decisions, with the canonical decision-frameworks and decision-journal references |
 | error-handling-patterns | [SKILL.md](skills/error-handling-patterns/SKILL.md) | Robust error handling in agent workflows |
 | excalidraw-diagrams | [SKILL.md](skills/excalidraw-diagrams/SKILL.md) | Generate Excalidraw diagrams programmatically |
 | humanizing-text | [SKILL.md](skills/humanizing-text/SKILL.md) | Turn generic AI prose into natural language |
 | skill-searcher | [SKILL.md](skills/skill-searcher/SKILL.md) | Find the right skill in a library by semantic match |
 | ui-ux-pro-max | [SKILL.md](skills/ui-ux-pro-max/SKILL.md) | UI/UX reference: style systems, palettes, component patterns |
 
-**decision-partner references:** [decision-frameworks](skills/decision-partner/references/decision-frameworks.md) · [decision-journal](skills/decision-partner/references/decision-journal.md)
-
-**board-of-advisors-blueprint references:** [lens-file-format](skills/board-of-advisors-blueprint/references/lens-file-format.md) · [router](skills/board-of-advisors-blueprint/references/router.md) · [session-protocol](skills/board-of-advisors-blueprint/references/session-protocol.md) · [thinking-tools-integration](skills/board-of-advisors-blueprint/references/thinking-tools-integration.md) · [grounding-and-portability](skills/board-of-advisors-blueprint/references/grounding-and-portability.md) · [push-mode-digest](skills/board-of-advisors-blueprint/references/push-mode-digest.md) · [outputs-and-templates](skills/board-of-advisors-blueprint/references/outputs-and-templates.md)
-
 **error-handling-patterns references:** language-specific patterns for [Go](skills/error-handling-patterns/references/go-patterns.md) · [Python](skills/error-handling-patterns/references/python-patterns.md) · [Rust](skills/error-handling-patterns/references/rust-patterns.md) · [TypeScript](skills/error-handling-patterns/references/typescript-patterns.md)
 
 **excalidraw-diagrams:** [examples](skills/excalidraw-diagrams/examples/) (api-flow, cicd-pipeline, user-registration) · [generators](skills/excalidraw-diagrams/diagrams-workflows/)
 
 **ui-ux-pro-max:** [cloning_website](skills/ui-ux-pro-max/cloning_website.md) · [antigravity-skills-creator](skills/ui-ux-pro-max/antigravity-skills-creator.md) · `data/` holds the style, palette, typography and stack CSVs · `scripts/` holds the search and design-system helpers
+
+## `Judgement/`
+
+A modular toolkit for thinking through decisions with no obviously correct answer, in any domain. Two engines, and five ports you plug your own material into like a USB stick: lenses (who advises), context (what is true), domain packs (how your field talks), tools (extra methods) and outputs (the shape of the deliverable). Built at Kasona Wealth Intelligence, where the investing version runs on our own data infrastructure. Start with [Judgement/README.md](Judgement/README.md).
+
+| Entry | Purpose |
+| --- | --- |
+| [README.md](Judgement/README.md) | What it is, which engine to open, the five ports, the ground rules no plug can switch off |
+| [PLUGGED-IN.md](Judgement/PLUGGED-IN.md) | The manifest: which plugs are active right now. Delete a row to unplug |
+| [decision-partner](Judgement/decision-partner/SKILL.md) | Engine for one decision that is yours: OOC/EMR from ranked outcome to a dated decision, any domain |
+| [board-of-advisors-blueprint](Judgement/board-of-advisors-blueprint/SKILL.md) | Engine for pressure-testing a decision from several angles: lens files with a provenance contract, routing, a four-round debate |
+| [ports/README.md](Judgement/ports/README.md) | The plug contract, the Decision Record, how to add your own plug |
+
+**decision-partner references:** [decision-frameworks](Judgement/decision-partner/references/decision-frameworks.md) · [decision-journal](Judgement/decision-partner/references/decision-journal.md)
+
+**board-of-advisors-blueprint references:** [lens-file-format](Judgement/board-of-advisors-blueprint/references/lens-file-format.md) · [router](Judgement/board-of-advisors-blueprint/references/router.md) · [session-protocol](Judgement/board-of-advisors-blueprint/references/session-protocol.md) · [thinking-tools-integration](Judgement/board-of-advisors-blueprint/references/thinking-tools-integration.md) · [grounding-and-portability](Judgement/board-of-advisors-blueprint/references/grounding-and-portability.md) · [push-mode-digest](Judgement/board-of-advisors-blueprint/references/push-mode-digest.md) · [outputs-and-templates](Judgement/board-of-advisors-blueprint/references/outputs-and-templates.md)
+
+**Ports (the plugs that ship with the sockets):**
+
+| Port | Shipped plugs |
+| --- | --- |
+| lens | [template](Judgement/ports/lens/_template.md) · [skeptic-seat](Judgement/ports/lens/skeptic-seat.md) · [customer-seat](Judgement/ports/lens/customer-seat.md) |
+| context | [template](Judgement/ports/context/_template.md) |
+| domain | [template](Judgement/ports/domain/_template.md) · [personal-life-career](Judgement/ports/domain/personal-life-career.md) · [business-and-product](Judgement/ports/domain/business-and-product.md) |
+| tools | [picker](Judgement/ports/tools/README.md) · [template](Judgement/ports/tools/_template.md) · [next-best-affordable](Judgement/ports/tools/next-best-affordable.md) · [kill-review](Judgement/ports/tools/kill-review.md) · [gate-ladder](Judgement/ports/tools/gate-ladder.md) · [sharp-questions](Judgement/ports/tools/sharp-questions.md) |
+| output | [template](Judgement/ports/output/_template.md) · [decision-journal-entry](Judgement/ports/output/decision-journal-entry.md) · [one-page-memo](Judgement/ports/output/one-page-memo.md) · [real-advisor-briefing](Judgement/ports/output/real-advisor-briefing.md) · [chat-summary](Judgement/ports/output/chat-summary.md) |
 
 ## `patterns/`
 

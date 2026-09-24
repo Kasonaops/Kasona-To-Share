@@ -3,6 +3,14 @@
 Two things a session can produce beyond the synthesis itself: a briefing for a real human, and a
 journal entry for your future self.
 
+Both are **output plugs** in the Judgement toolkit. The session keeps one fixed structure, the
+Decision Record (`../../ports/README.md`), and an output plug decides how it is rendered. The
+ready-to-use versions live in `../../ports/output/`: `real-advisor-briefing.md`,
+`decision-journal-entry.md`, `one-page-memo.md` and `chat-summary.md`. The templates below are
+the board-specific starting point, and you can swap either for your own output plug without
+touching the engine. Whatever you plug in must keep the never-drop fields, above all the
+simulated label on every lens voice.
+
 ## The real-advisor bridge
 
 Real advisors are the third category, and the rule is absolute: **they are never simulated.** No
@@ -102,6 +110,16 @@ thinking-tools-integration.md.}
 ## Decision made
 {Concrete and actionable.}
 
+## Rejected options
+| Rejected option | Category | Why | Revisit trigger |
+|---|---|---|---|
+| | (a) goal conflict, (b) consequence too large, (c) upside too unlikely, (d) not available, (e) deliberately deferred | | An observable event. A deferral with no trigger is an unspoken rejection |
+
+## Decision quality, written before the outcome is known
+What you knew at the time, what you could not have known, and why you consider the process sound.
+Not revised at the review. At the review, read this first, then evaluate the outcome. Judging a
+decision only by how it turned out is "resulting", and it trains the wrong lesson.
+
 ## Kill-criteria
 {The conditions under which this gets abandoned, written so you would recognise them.}
 
@@ -125,4 +143,4 @@ your own decision process, and reading a year of them back is the fastest availa
 out where your judgment is systematically off.
 
 For prepare, reflect and retrospective modes of journalling beyond a board session, see
-`skills/decision-partner/references/decision-journal.md` in this repository.
+`../../decision-partner/references/decision-journal.md` in this repository.

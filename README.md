@@ -16,6 +16,7 @@ Questions, feedback, or ideas for what to share next? Reach out at [hallo@kasona
 | --- | --- |
 | `plugins/` | Claude Code plugins, installable as-is |
 | `skills/` | Agent skills following the `SKILL.md` convention |
+| `Judgement/` | Modular decision toolkit: two engines (decision partner, board of advisors) plus plug-in ports for lenses, context, domain packs, tools and outputs |
 | `patterns/` | Framework-agnostic implementation patterns — concept guides, not libraries |
 | `prompts/` | Standalone prompts |
 
