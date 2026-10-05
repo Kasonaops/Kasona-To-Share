@@ -32,10 +32,10 @@ Claude asks before installing anything.
 
 ```bash
 ffmpeg -i raw.mp4 -vn -ac 1 -ar 16000 -c:a pcm_s16le audio16k.wav
-whisper-cli -m models/ggml-small.bin -f audio16k.wav -ml 1 -sow -ojf -of words
+whisper-cli -m models/ggml-small.bin -f audio16k.wav -l auto -ml 1 -sow -ojf -of words
 ```
 
-The flags above (`-ml 1` and `-sow` for one word per segment, `-ojf` for full JSON) are from memory of recent whisper.cpp builds: **verify with `whisper-cli --help`**, since binary names and options have changed between versions. Have the agent normalise whatever comes out into one flat file:
+The flags were checked against the whisper.cpp CLI README (`examples/cli`): `-ml N` is the maximum segment length in characters, `-sow` splits on word rather than on token, `-ojf` writes the full JSON (more detail than `-oj`), and `-of` sets the output path without extension, so the result lands in `words.json`. Setting `-ml 1` together with `-sow` is the usual way to get one word per segment; confirm that on a short test clip, because the README documents the flags separately and does not promise that combination. The default language is `en`, so `-l auto` (or a specific code) is needed for other languages, and the default model is the English-only base model, so pass `-m` explicitly. The binary is `whisper-cli` in current builds; older builds called it `main`, so run `whisper-cli --help` if the command is not found. Have the agent normalise whatever comes out into one flat file:
 
 ```json
 [
@@ -182,7 +182,7 @@ Optional follow-ups, each its own pattern: [overlay-asset-research](overlay-asse
 - **Odd crop sizes.** H.264 with yuv420p needs even width and height. The script rounds down to even numbers; keep that when you edit it.
 - **Layout switches mid-sentence.** Feels like a glitch, not an edit.
 - **Assuming the face will be tracked.** It will not. Check stills.
-- **Whisper flags from memory.** Option names differ between builds. Verify with `--help`.
+- **Stale whisper flags.** The flags above match the current whisper.cpp CLI README; older builds name the binary and some options differently. Run `whisper-cli --help` if something is not recognised.
 - **Rendering before approval.** Re-rendering is cheap, but re-explaining a bad cut is not. Approve the EDL table first.
 
 ## Prompt to give your agent

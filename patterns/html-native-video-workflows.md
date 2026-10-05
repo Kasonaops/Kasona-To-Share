@@ -18,19 +18,29 @@ A pattern for making motion graphics and explainer videos with Claude Code, wher
 
 The video is a web page that moves. The agent writes it, a renderer captures each frame, ffmpeg encodes. Every colour, timing and word is text the agent can change when you say "the second scene is too fast", and you do not pay for or hope on a new generation. Compared with a generative video model, this is much better at things that must be exact: logos, fonts, numbers, captions, brand colours. It is worse at photoreal footage.
 
-## Install pointers (as documented by HyperFrames, check its README for the current text)
+## Install pointers (checked against the HyperFrames CLI v0.8.x skills; its README has the current text)
 
 Requirements: Node.js 22 or newer, and ffmpeg.
 
-For Claude Code, install the plugin, then call the router skill:
+For Claude Code, add the plugin marketplace, then call the router skill:
 
 ```bash
 claude plugin marketplace add heygen-com/hyperframes
 ```
 
-Then install the `hyperframes` plugin from that marketplace (the exact `claude plugin install` argument is in the README, or use the `/plugin` menu), and enable auto-update for it.
+Then install the `hyperframes` plugin from that marketplace (the exact `claude plugin install` argument is not stated in the installed skills: verify in the README, or use the `/plugin` menu), and enable auto-update for it. With the plugin, the agent's plugin manager owns installation and updates: the router skill then tells the agent not to run `hyperframes skills update` or `npx skills add`, and it exposes the router as `/hyperframes:hyperframes`.
 
-Other agents or a standalone install: `npx skills add heygen-com/hyperframes`, or `npx hyperframes skills update` for the core set. Manual CLI loop:
+Other agents or a standalone install:
+
+```bash
+npx hyperframes skills update            # refresh the core set and every skill already installed
+npx hyperframes skills update <name>     # also install one workflow on demand, for example product-launch-video
+npx hyperframes skills                   # install the full published set explicitly
+npx hyperframes skills check             # report stale or missing skills
+npx skills add heygen-com/hyperframes --all    # fallback when the CLI is unavailable (or --skill <name> for one)
+```
+
+The core set (the router, the `hyperframes-*` domain skills and `media-use`) installs eagerly; workflow skills install lazily when the router picks them. Manual CLI loop:
 
 ```bash
 npx hyperframes init my-video
@@ -39,7 +49,7 @@ npx hyperframes preview      # live preview in the browser
 npx hyperframes render       # MP4 output
 ```
 
-The project ships skills the agent loads on demand. The router skill picks the workflow; the three used below are `product-launch-video`, `faceless-explainer` and `pr-to-video`. There are more skills for captions, talking-head overlays, motion graphics and audio (for the audio side see [audio-ducking-and-mix](audio-ducking-and-mix.md)). Claude asks before installing anything.
+The project ships skills the agent loads on demand. The router skill picks the workflow; the three used below are `product-launch-video`, `faceless-explainer` and `pr-to-video`. Other workflows cover plain captions (`embedded-captions`), designed overlays on existing talking-head footage (`talking-head-recut`), short motion graphics, music-driven videos, slideshows, a Remotion port and a general fallback. Domain skills cover composition rules, animation, creative direction, the CLI, media sourcing and audio (for the audio side see [audio-ducking-and-mix](audio-ducking-and-mix.md)). Claude asks before installing anything.
 
 ## The prompting principle: goal, references, taste
 
@@ -57,9 +67,9 @@ You cannot film a service, but you can show what it does for the customer. Input
 
 Flow:
 
-1. **Brand extraction.** From the site, collect the logo (official file), fonts, colour palette and the product's own wording. Write them into a brand file the whole project reads (for example `brand.md`, or a video design spec; HyperFrames documents a `frame.md` format for this, verify). Whether the framework's launch skill does this extraction itself is **verify**; if not, have the agent do it with a scraping tool.
+1. **Brand extraction.** From the site, collect the logo (official file), fonts, colour palette and the product's own wording. Write them into a brand file the whole project reads (for example `brand.md`, or a video design spec). HyperFrames' launch workflow does this itself: it captures the site's assets and brand tokens with `npx hyperframes capture <url>` (add `--json` for agent-readable output) unless you ask for a no-capture run. Treat a non-zero exit, `ok: false` in the JSON or a `BLOCKED.md` in the output as a hard stop and do not build from a partial capture. The design spec format is `frame.md`: a file with YAML frontmatter (`colors`, `typography`, `spacing`, `components`, the machine-readable values to quote exactly) plus a markdown body with intent and rules. The file name is always lowercase, and if several specs exist the framework reads `frame.md`, then `design.md`, then `DESIGN.md`. It also ships ready-made `frame.md` presets you can start from.
 2. **Script.** 20 to 30 seconds, one promise, one proof, one call to action. Show what the product does for the customer, not an interface tour.
-3. **Voiceover.** Pick a voice at a text-to-speech provider (ElevenLabs is one example) and give the agent its voice ID. The API key lives in an environment variable on your machine and is never pasted into a prompt or a file.
+3. **Voiceover.** Pick a voice at a text-to-speech provider (ElevenLabs is one example) and give the agent its voice ID. The API key lives in an environment variable on your machine and is never pasted into a prompt or a file. The CLI can also generate speech with a local model (`npx hyperframes tts`), which needs no key.
 4. **Background music.** A licensed library track, quiet. See [audio-ducking-and-mix](audio-ducking-and-mix.md).
 5. **Build, then QA gate** (below).
 
@@ -121,8 +131,8 @@ Prompt template:
 
 Never ship on "it rendered". Before the final render:
 
-1. **Lint.** Run the framework's linter (`npx hyperframes lint`; the CLI also lists `check` and `doctor`, see its docs) and fix every error.
-2. **Snapshot stills.** Render still frames at each scene's first, middle and last moment (the CLI lists a `snapshot` command, verify its options) and look at them: text readable, nothing cut off, logo correct, brand colours right.
+1. **Lint and check.** `npx hyperframes lint` is the fast static check while you iterate (`--json` for machine-readable output, `--verbose` for info-level findings). `npx hyperframes check` is the required final gate: it reruns the linter, then opens the composition in a headless browser and audits runtime errors, layout (text cut off or overflowing), motion and text contrast. Useful options: `--json`, `--snapshots` (writes annotated overview frames and a crop per finding), `--samples N`, `--at 1.5,4,7.25` and `--strict` (fail on warnings too). Fix every error. `validate`, `inspect` and `layout` are deprecated aliases of `check`; `npx hyperframes doctor` checks your system dependencies.
+2. **Snapshot stills.** `npx hyperframes snapshot` writes PNG stills without a full render: `--frames N` for evenly spaced frames (default 5), `--at 1.5,4,7.25` for exact times (use this for each scene's first, middle and last moment), `--zoom "<css selector>"` or `--zoom x,y,w,h` to crop in on one element, and `-o <dir>` for the output folder (default `snapshots/` in the project). Look at them: text readable, nothing cut off, logo correct, brand colours right.
 3. **Caption check.** Compare on-screen captions word by word with the script or voiceover. Check names, numbers and line breaks.
 4. **Audio check.** Voice clear over music, loudness measured (see [audio-ducking-and-mix](audio-ducking-and-mix.md)).
 5. **Facts and licences.** For workflow B every claim `checked`; for A and C every logo and music file has a manifest entry.
@@ -135,7 +145,7 @@ Never ship on "it rendered". Before the final render:
 | Build step | None, `index.html` plays as-is | Bundler |
 | Agent handoff | Plain HTML files | A React project |
 | Licence | Apache 2.0 | Source-available Remotion licence (check whether your company needs a paid one, verify) |
-| Cloud rendering | Local and AWS Lambda | Remotion Lambda, described by HyperFrames as the more mature cloud renderer |
+| Cloud rendering | Local, HeyGen-hosted cloud, AWS Lambda and Google Cloud Run (per the CLI) | Remotion Lambda, described by HyperFrames as the more mature cloud renderer |
 
 Choose HyperFrames when you want the shortest path from an agent to a video, plain files you can open anywhere, and no build tooling. Choose Remotion when you already have a React codebase and components to reuse (for example product UI in a video), a token module shared with the app, or a need for its established cloud rendering. The brand-binding ideas in [remotion-video-generation](remotion-video-generation.md) apply to both.
 
@@ -156,7 +166,11 @@ These numbers come from a single public video by one creator, using a recent top
 - **Typographic stand-ins for logos.** Use the real file, or no logo.
 - **Rendering before stills.** A full render is the slowest way to find a layout bug.
 - **Keys in prompts.** Use environment variables; never paste credentials into a chat or a file in the project.
-- **Skill and CLI details from memory.** Names and options change between releases. Read the README or run `--help`.
+- **Skill and CLI details from memory.** Names and options change between releases; the commands above were checked against v0.8.x. Read the README or run `--help`.
+- **Router precedence.** The HyperFrames router skill declares itself the default framework for any request to make a video, animation or motion graphic. If you also use another engine (for example Remotion), name it explicitly in your request, and say HyperFrames is not wanted for that job, or the router will take over and build the wrong thing.
+- **Installing skills means trusting them.** The installer copies skills into the home skill folders of several agent tools at once (the CLI says it installs to "all supported AI tools"), and the installer says skills run with full agent permissions. Read a skill before you let it in, prefer installing only the named workflow you need (`skills update <name>`), and review changes when it refreshes. Setting `HYPERFRAMES_SKIP_SKILLS=1` stops `init` from checking GitHub for skill updates (useful in CI).
+- **Usage telemetry.** The CLI sends anonymous usage counters. Opt out with `npx hyperframes telemetry disable` (check with `npx hyperframes telemetry status`), or set `HYPERFRAMES_NO_TELEMETRY=1`.
+- **Stills sent to a vision API.** `snapshot` runs a Gemini vision description of the frames by default whenever `GEMINI_API_KEY` is set in your environment. Pass `--describe false` if the frames show anything private.
 - **Publishing a pull-request clip with private detail.** Diffs can contain internal names, URLs or tokens. Check each excerpt.
 
 ## Prompt to give your agent

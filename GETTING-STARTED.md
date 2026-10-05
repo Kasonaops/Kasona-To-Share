@@ -123,6 +123,37 @@ Open an **empty folder** in Claude Code, then paste (choose a, b or c):
 > link]. Tell me what you will install and why before you do it, and show me still images before you
 > make the full video.
 
+### Generated clips: b-roll, product shots, consistent characters (higgsfield-generative-video pattern, Claude Code only)
+
+You need your own paid Higgsfield account. Only you can create it and approve the sign-in; Claude
+will tell you when. Open an **empty folder** in Claude Code, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/higgsfield-generative-video.md
+> and make [number] short clips for [what the video is about], format [vertical or horizontal]. Write
+> a shot list first and wait for my approval. Before every generation tell me the model, length and
+> estimated credit cost and wait for my yes. Do not put text or logos into generated clips.
+
+### A presenter video with an avatar, or a translated version (heygen-avatar-video pattern, Claude Code only)
+
+You need your own HeyGen account. If you want an avatar of a real person (including yourself), that
+person must record a short consent clip themselves; Claude cannot do that for you. Never paste an
+API key into the chat; Claude will tell you how to set it up safely. Open an **empty folder** in
+Claude Code, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/heygen-avatar-video.md
+> and make a [length] presenter video about [topic] for [audience] from this script: [file name, or
+> "write one and show it to me first"]. Make a 10-second test first, and tell me what I must label
+> or get consent for before I publish.
+
+### Not sure which video approach to use? (choosing-a-video-approach pattern, Claude Code only)
+
+Open the folder with your material (or an empty one) in Claude Code, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/choosing-a-video-approach.md
+> I want to make [describe the video, who watches it, how long]. I have [footage, script, photos, or
+> nothing yet]. Recommend which approaches to combine, tell me what each step will cost me, and wait
+> for my yes before you build anything.
+
 ### An onboarding tour for your web app (guided-tour pattern, Claude Code only)
 
 Open the folder that contains your app's code in Claude Code, then paste:

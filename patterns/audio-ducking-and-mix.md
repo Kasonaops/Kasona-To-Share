@@ -16,7 +16,7 @@ A pattern for the sound of a finished video: licensed library music instead of s
 
 - A music bed that sits clearly under the voice and swells back in the pauses
 - Sound effects used sparingly, on moments that earn them
-- A file at a standard loudness (about -14 LUFS integrated, -1.5 dBTP true peak), verified by measurement
+- A file at a consistent loudness (-16 LUFS integrated, -1.5 dBTP true peak, loudness range 11 LU), verified by measurement
 - A `tracks.json` that records where every sound came from and under which licence
 
 ## 1. Use licensed library audio, not synthesised audio
@@ -99,13 +99,13 @@ Tune by ear and by measurement: with real speech the right `threshold` depends o
 
 ## 5. Loudness: two-pass loudnorm
 
-Targets used by many social and streaming platforms: **-14 LUFS integrated, -1.5 dBTP true peak**. Platforms differ and change their rules; verify the current value for your destination.
+Default target: **-16 LUFS integrated, -1.5 dBTP true peak, loudness range (LRA) 11 LU**. Some platforms normalise playback to about -14 LUFS; -16 is chosen as a safe, consistent target that leaves headroom without needing hard limiting. Platforms differ and change their rules, so verify per platform. If one destination needs another value, change `I=` in both passes and nothing else.
 
 Single-pass `loudnorm` works dynamically and can alter the sound. The two-pass method measures first, then applies a mostly linear gain computed from the measurement, which is cleaner.
 
 ## 6. The command skeleton
 
-This script was run end to end on synthetic tones (a gated sine as voice, a steady sine as music, a short beep as the effect) with ffmpeg 8.0.1. The result measured -14.0 LUFS integrated and a true peak below -1.5 dBTP, and the music measured about 5 dB lower during the voice than in the gaps with these test levels. It is a skeleton to adapt, not a tuned preset.
+This script was run end to end on synthetic tones (a gated sine as voice, a steady sine as music, a short beep as the effect) with ffmpeg 8.0.1. The final file measured -15.9 to -16.0 LUFS integrated with a true peak well below -1.5 dBTP; a deliberately peaky test signal landed at -16.3 LUFS with the true peak held at -1.5 dBTP, which is the limiter doing its job. In the same test the music bed measured about 20 dB lower while a loud synthetic voice was present than in the gaps, but only about 1 dB lower when the voice tone was very quiet, because `threshold` is relative to the voice level (see section 3). It is a skeleton to adapt, not a tuned preset.
 
 ```bash
 #!/usr/bin/env bash
@@ -130,7 +130,7 @@ ffmpeg -y -hide_banner -loglevel error -i "$VOICE" -i "$MUSIC" -i "$SFX" -filter
 
 # 2. Loudnorm pass 1: measure only
 ffmpeg -hide_banner -nostats -i premix.wav \
-  -af loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json -f null - 2> pass1.txt
+  -af loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json -f null - 2> pass1.txt
 sed -n '/^{/,/^}/p' pass1.txt > pass1.json
 
 # 3. Loudnorm pass 2: apply with the measured values
@@ -139,8 +139,8 @@ import json
 d = json.load(open('pass1.json'))
 print('measured_I=%s:measured_TP=%s:measured_LRA=%s:measured_thresh=%s:offset=%s' % (
     d['input_i'], d['input_tp'], d['input_lra'], d['input_thresh'], d['target_offset']))")
-ffmpeg -y -hide_banner -loglevel error -i premix.wav \
-  -af "loudnorm=I=-14:TP=-1.5:LRA=11:${MEASURED}:linear=true" -ar 48000 final.wav
+ffmpeg -y -hide_banner -nostats -i premix.wav \
+  -af "loudnorm=I=-16:TP=-1.5:LRA=11:${MEASURED}:linear=true:print_format=json" -ar 48000 final.wav 2> pass2.txt
 
 # 4. Verify
 ffmpeg -hide_banner -nostats -i final.wav -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I:|Peak:)"
@@ -156,8 +156,8 @@ Notes:
 
 - `amix=...:normalize=0` keeps the stems at their set levels. That option exists in recent ffmpeg versions (7.0 or newer, verify with `ffmpeg -h filter=amix`); on older builds, `amix` divides every input by the number of inputs, so compensate with `volume`.
 - `asplit` is needed because the voice feeds both the mix and the ducker.
-- If pass 2 reports `normalization_type : dynamic`, the measurement could not be applied linearly (for example the peaks are too high for the target). Lower the premix level slightly and run again.
-- If your video framework mixes audio itself, it may offer a ducking or "carve" step (HyperFrames documents one in its audio skill, verify). Use the ffmpeg route when you want one verifiable file and one measurement.
+- Pass 1 always prints `normalization_type : dynamic`; that is just the mode of the measuring run. Read the same field in `pass2.txt`: `linear` means the measured gain was applied cleanly. If it says `dynamic`, the measurement could not be applied linearly (for example the peaks are too high for the target, so the true-peak limit pulled the result a little below -16 LUFS). Lower the premix level slightly and run again.
+- If your video framework mixes audio itself, use its own step. HyperFrames (CLI v0.8.x) documents a "voiceover carve" in its audio skill: instead of ducking the whole bed, it cuts only the frequency bands the voice occupies and follows the voice level over time, written onto the music track as `data-fx-carve`, `data-fx-chain` and `data-automation`. Its skill treats the carve as required whenever music plays under a voice, run with `node <skill folder>/scripts/carve.mjs --comp index.html` (default strength 0.8). Its CLI also has `npx hyperframes normalize-audio --target <audio element id> --lufs -16`, whose default is -16 as well. Use the ffmpeg route in this pattern when you want one verifiable file and one measurement, for example for audio that leaves the framework.
 
 ## 7. Check before you ship
 
@@ -183,4 +183,4 @@ Notes:
 > Goal: mix the audio for `[video file]`. The voice is `[file or the video's own audio]`, the music bed is `[file]`, sound effects are `[files]`. Place effects at `[times or "at each overlay cue in cues.json"]`.
 > Taste: `[how present the music should be: barely audible, or clearly felt]`. Destination: `[platform]`.
 >
-> Use only the files I gave you. Do not synthesise music or effects. Build the mix with ffmpeg exactly as in the pattern: duck the music with sidechaincompress, keep effects sparse, normalise with two-pass loudnorm to -14 LUFS and -1.5 dBTP, and verify with ebur128. Report the loudness before and after. Write `tracks.json` for every music and effect file with the source URL, the retrieval date and the licence fields; leave `verify` wherever you cannot read the licence yourself, and list those items for me. Do not install anything without asking first.
+> Use only the files I gave you. Do not synthesise music or effects. Build the mix with ffmpeg exactly as in the pattern: duck the music with sidechaincompress, keep effects sparse, normalise with two-pass loudnorm to -16 LUFS, -1.5 dBTP and LRA 11, and verify with ebur128. Report the loudness before and after. Write `tracks.json` for every music and effect file with the source URL, the retrieval date and the licence fields; leave `verify` wherever you cannot read the licence yourself, and list those items for me. Do not install anything without asking first.

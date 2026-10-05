@@ -15,8 +15,9 @@ A pattern for turning a codebase, service description, brand assets and website 
 ## Optional add-ons
 
 - **Voiceover:** any TTS provider with a stable voice ID and API key (e.g. ElevenLabs)
-- **Avatars:** HeyGen
-- **Other generated video:** Higgsfield (via MCP)
+- **Avatars:** HeyGen, for a synthetic presenter, voice cloning with consent and translation. See [heygen-avatar-video](heygen-avatar-video.md)
+- **Other generated video:** Higgsfield, for b-roll, product shots and character-consistent clips driven from Claude Code. See [higgsfield-generative-video](higgsfield-generative-video.md)
+- **Which approach when:** [choosing-a-video-approach](choosing-a-video-approach.md)
 
 ## 1. Folder structure
 

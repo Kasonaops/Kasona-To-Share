@@ -132,7 +132,7 @@ Then enforce the density rules:
 
 ## 5. Hand over to the renderer
 
-The cue file is renderer-neutral. With an HTML-native framework each cue becomes a clip with a start time and a duration; with Remotion a sequence; with ffmpeg an `overlay=enable='between(t,41.38,43.10)'` filter. See [html-native-video-workflows](html-native-video-workflows.md) and [remotion-video-generation](remotion-video-generation.md).
+The cue file is renderer-neutral. With an HTML-native framework each cue becomes a clip with a start time and a duration (in HyperFrames, `data-start` and `data-duration` on its own track; its `talking-head-recut` workflow is built for designed overlays on footage that stays unchanged); with Remotion a sequence; with ffmpeg an `overlay=enable='between(t,41.38,43.10)'` filter. See [html-native-video-workflows](html-native-video-workflows.md) and [remotion-video-generation](remotion-video-generation.md).
 
 ## Fair use and trademark caution
 
