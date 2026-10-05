@@ -76,6 +76,10 @@ Framework-agnostic implementation patterns. Concept guides, not libraries.
 | --- | --- | --- |
 | [guided-tour-pattern](patterns/guided-tour-pattern.md) | Interactive onboarding walkthrough: spotlight overlay, step data model, persistence | Claude Code, opened in your app's code folder |
 | [remotion-video-generation](patterns/remotion-video-generation.md) | Turn a codebase, service description and brand assets into automated videos with Remotion + Claude Code | Claude Code, opened in an empty folder. Claude installs Node.js if missing, after asking |
+| [talking-head-autocut](patterns/talking-head-autocut.md) | Cut a raw talking-head recording into a vertical short: silences, fillers and false starts removed via word timestamps, hard-cut punch-in layouts, edit list, ffmpeg render | Claude Code, opened in a folder with your video. Needs ffmpeg and a transcriber; Claude asks before installing |
+| [overlay-asset-research](patterns/overlay-asset-research.md) | Turn a transcript into on-screen visuals: pick moments, research logos and screenshots from official sources, asset manifest, timed cue file | Claude Code, opened in a folder with your transcript or video |
+| [audio-ducking-and-mix](patterns/audio-ducking-and-mix.md) | Licensed music and sound effects, voice-activated ducking, two-pass loudness normalisation, track manifest with licence fields | Claude Code, opened in a folder with your audio files. Needs ffmpeg |
+| [html-native-video-workflows](patterns/html-native-video-workflows.md) | Three workflows on an HTML-native video framework (HyperFrames as example, Remotion as alternative): ad spot from a website, faceless explainer, release-notes clip from a pull request | Claude Code, opened in an empty folder. Needs Node.js and ffmpeg; Claude asks before installing |
 
 ## `prompts/`
 

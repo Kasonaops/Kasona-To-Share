@@ -87,6 +87,42 @@ Node.js), asks before installing it, builds the folder structure from the patter
 logo and brand colours, and renders a first video file you can open. Plan roughly an hour for the
 first video, most of it answering Claude's questions.
 
+### A short video cut from a raw recording (talking-head-autocut pattern, Claude Code only)
+
+Put your raw video in a new folder, open that folder in Claude Code, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/talking-head-autocut.md
+> and cut the video in this folder into one vertical short of about [length] for [platform]. Show me
+> the edit list before you render anything, and ask before installing any tools.
+
+### On-screen logos and screenshots for a video (overlay-asset-research pattern, Claude Code only)
+
+Open the folder with your video and its transcript (or script) in Claude Code, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/overlay-asset-research.md
+> and find the moments in this transcript that need an on-screen visual. Collect logos and screenshots
+> from official sources only, and show me the list of assets with their sources before you build
+> anything.
+
+### Music, sound effects and loudness for a video (audio-ducking-and-mix pattern, Claude Code only)
+
+Open the folder with your video or voice recording and the music and sound effect files you
+downloaded, then paste:
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/audio-ducking-and-mix.md
+> and mix the voice, music and sound effects in this folder so the music dips under my voice. Tell me
+> the loudness before and after, and list anything about the licences I still need to check myself.
+
+### Motion-graphics videos built as code (html-native-video-workflows pattern, Claude Code only)
+
+Open an **empty folder** in Claude Code, then paste (choose a, b or c):
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/html-native-video-workflows.md
+> and do workflow [a: ad spot from my product's website / b: explainer video on a topic, with
+> checked facts / c: release-notes clip from a pull request] for [website link, topic or pull request
+> link]. Tell me what you will install and why before you do it, and show me still images before you
+> make the full video.
+
 ### An onboarding tour for your web app (guided-tour pattern, Claude Code only)
 
 Open the folder that contains your app's code in Claude Code, then paste:
