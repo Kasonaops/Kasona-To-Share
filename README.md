@@ -24,7 +24,7 @@ Questions, feedback, or ideas for what to share next? Reach out at [hallo@kasona
 | --- | --- | --- | --- |
 | [`Judgement/`](Judgement/README.md) | Modular decision toolkit: two engines (decision partner, board of advisors) plus plug-in ports for lenses, context, domain packs, tools and outputs | Think through a hard decision with a proven process | Any Claude |
 | [`skills/`](skills/) | Agent skills following the `SKILL.md` convention | A method Claude follows with you | Any Claude |
-| [`patterns/`](patterns/) | Framework-agnostic implementation patterns, concept guides rather than libraries | A recipe Claude uses to build something for you, for example automated product videos | Claude Code |
+| [`patterns/`](patterns/) | Framework-agnostic implementation patterns, concept guides rather than libraries. Video is covered end to end: cutting a talking head, on-screen logos and screenshots, music and loudness, motion graphics built as code, generated clips and avatar presenters | A recipe Claude uses to build something for you, for example a finished video. **Making a video? Start with [choosing-a-video-approach](patterns/choosing-a-video-approach.md).** | Claude Code |
 | [`prompts/`](prompts/) | Standalone prompts | Text you copy into a chat and fill in | Any Claude |
 | [`plugins/`](plugins/) | Claude Code plugins, installable as-is | Add-ons for Claude Code | Claude Code |
 

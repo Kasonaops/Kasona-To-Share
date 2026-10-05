@@ -70,19 +70,28 @@ A modular toolkit for thinking through decisions with no obviously correct answe
 
 ## `patterns/`
 
-Framework-agnostic implementation patterns. Concept guides, not libraries.
+Framework-agnostic implementation patterns. Concept guides, not libraries. Patterns need **Claude Code**.
+
+### Video
+
+Eight patterns cover video. **Start with [choosing-a-video-approach](patterns/choosing-a-video-approach.md)**: it asks what you have and what you want, then tells you which of the other seven to use and in which order. Copy-paste sentences for each: [GETTING-STARTED.md](GETTING-STARTED.md#video-which-one-do-i-need).
+
+| Pattern | Purpose, in plain words | Needs |
+| --- | --- | --- |
+| [choosing-a-video-approach](patterns/choosing-a-video-approach.md) | **Start here.** A guide that helps you decide which video approach fits your material, how to combine them, and what to avoid. Includes a worked example and a short glossary (verify, manifest, edit list, cue file) | Claude Code, opened in a folder with your material (or an empty one) |
+| [talking-head-autocut](patterns/talking-head-autocut.md) | Turn a raw recording of one person talking into a tight vertical short: pauses, fillers ("um") and false starts are cut, and the picture zooms in and out between sentences. You approve the edit list before anything is rendered | Claude Code, opened in a folder with your video. Needs ffmpeg and a transcription tool; Claude asks before installing |
+| [overlay-asset-research](patterns/overlay-asset-research.md) | Find the moments in a spoken video that deserve a visual, collect real logos and screenshots from official sources, record where each came from, and write a cue file saying when each one appears | Claude Code, opened in a folder with your transcript or video |
+| [audio-ducking-and-mix](patterns/audio-ducking-and-mix.md) | Add licensed music and sound effects, make the music dip automatically under the voice, and set the final loudness to the standard of -16 LUFS and -1.5 dBTP (measures of average loudness and peak level). Records the licence of every sound | Claude Code, opened in a folder with your audio files. Needs ffmpeg |
+| [html-native-video-workflows](patterns/html-native-video-workflows.md) | Videos built as code: an ad spot from a product website, an explainer with self-drawn figures and checked facts, or a release-notes clip from a code change. HyperFrames is the worked example, Remotion the alternative | Claude Code, opened in an empty folder. Needs Node.js and ffmpeg; Claude asks before installing |
+| [remotion-video-generation](patterns/remotion-video-generation.md) | Turn a codebase, service description and brand assets into on-brand videos with Remotion (videos built from React components), reusing your product's real colours, fonts and logo | Claude Code, opened in an empty folder. Claude installs Node.js if missing, after asking |
+| [higgsfield-generative-video](patterns/higgsfield-generative-video.md) | Generate short footage and stills you cannot film (atmosphere clips, product shots, a recurring character), with a shot list, cost approval before every generation, and quality checks. Exact text and logos are added in code afterwards | Claude Code, opened in an empty folder. Needs your own paid Higgsfield account and browser sign-in; Claude asks before installing and before every credit-spending generation |
+| [heygen-avatar-video](patterns/heygen-avatar-video.md) | A synthetic presenter speaks your script, optionally translated into other languages. Covers setup, voices, and the consent and labelling rules | Claude Code, opened in an empty folder. Needs your own HeyGen account; consent recording for any digital twin; API key only as an environment variable you set |
+
+### App building
 
 | Pattern | Purpose | Needs |
 | --- | --- | --- |
 | [guided-tour-pattern](patterns/guided-tour-pattern.md) | Interactive onboarding walkthrough: spotlight overlay, step data model, persistence | Claude Code, opened in your app's code folder |
-| [remotion-video-generation](patterns/remotion-video-generation.md) | Turn a codebase, service description and brand assets into automated videos with Remotion + Claude Code | Claude Code, opened in an empty folder. Claude installs Node.js if missing, after asking |
-| [talking-head-autocut](patterns/talking-head-autocut.md) | Cut a raw talking-head recording into a vertical short: silences, fillers and false starts removed via word timestamps, hard-cut punch-in layouts, edit list, ffmpeg render | Claude Code, opened in a folder with your video. Needs ffmpeg and a transcriber; Claude asks before installing |
-| [overlay-asset-research](patterns/overlay-asset-research.md) | Turn a transcript into on-screen visuals: pick moments, research logos and screenshots from official sources, asset manifest, timed cue file | Claude Code, opened in a folder with your transcript or video |
-| [audio-ducking-and-mix](patterns/audio-ducking-and-mix.md) | Licensed music and sound effects, voice-activated ducking, two-pass loudness normalisation, track manifest with licence fields | Claude Code, opened in a folder with your audio files. Needs ffmpeg |
-| [html-native-video-workflows](patterns/html-native-video-workflows.md) | Three workflows on an HTML-native video framework (HyperFrames as example, Remotion as alternative): ad spot from a website, faceless explainer, release-notes clip from a pull request | Claude Code, opened in an empty folder. Needs Node.js and ffmpeg; Claude asks before installing |
-| [higgsfield-generative-video](patterns/higgsfield-generative-video.md) | Generative image and video clips driven from Claude Code: b-roll, product shots, character-consistent clips, motion transfer, reframe, upscale, dubbing; shot list, prompt structure, quality checks, where to build in code instead | Claude Code, opened in an empty folder. Needs your own paid Higgsfield account and browser sign-in; Claude asks before installing and before every credit-spending generation |
-| [heygen-avatar-video](patterns/heygen-avatar-video.md) | Presenter videos with a synthetic avatar: setup via MCP, command line or API, voices and the ElevenLabs question, translation, consent and disclosure rules, relation to HyperFrames | Claude Code, opened in an empty folder. Needs your own HeyGen account; consent recording for any digital twin; API key only as an environment variable you set |
-| [choosing-a-video-approach](patterns/choosing-a-video-approach.md) | Decision guide across all video patterns: footage cleanup, on-screen assets, audio, code-built motion graphics, generative clips, avatars; worked example combining three; what not to use them for | Claude Code, opened in a folder with your material |
 
 ## `prompts/`
 

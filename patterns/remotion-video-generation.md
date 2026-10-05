@@ -1,6 +1,6 @@
 # Automated video generation with Remotion + Claude Code
 
-A pattern for turning a codebase, service description, brand assets and website into animated videos automatically, using [Remotion](https://github.com/remotion-dev/remotion) (React-based video framework) driven by Claude Code.
+A pattern for turning a codebase, service description, brand assets and website into animated videos automatically, using [Remotion](https://github.com/remotion-dev/remotion) (a video framework where each scene is a React component, React being a widely used web-interface library) driven by Claude Code. Use it when you already have a codebase and brand values to reuse. For a quick ad spot, explainer or release-notes clip without a React project, the HyperFrames route in [html-native-video-workflows](html-native-video-workflows.md) is the shorter path.
 
 > **Not a developer? You do not need to read the rest of this page. Claude does.**
 >
@@ -10,14 +10,18 @@ A pattern for turning a codebase, service description, brand assets and website 
 >
 >    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/remotion-video-generation.md. Set it up for me in this folder, step by step. My product is [what it does, in one sentence], my website is [link], and my audience is [who watches]. Before installing anything, tell me what you will install and why. Then make one short test video of about 20 seconds.*
 >
-> Claude will ask before installing anything (usually Node.js), ask you for your logo and colours, and hand you a video file at the end. More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
+> Claude will ask before installing anything (usually Node.js, a free runtime that runs JavaScript programs on your computer), ask you for your logo and colours, and hand you a video file at the end. More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right approach? Start with [choosing-a-video-approach](choosing-a-video-approach.md).
 
 ## Optional add-ons
 
-- **Voiceover:** any TTS provider with a stable voice ID and API key (e.g. ElevenLabs)
+- **Voiceover:** any text-to-speech (TTS) provider with a stable voice ID and an API key, the secret code that lets software use your account (e.g. ElevenLabs). Keep the key in an environment variable you set yourself, never in the chat or in a project file
 - **Avatars:** HeyGen, for a synthetic presenter, voice cloning with consent and translation. See [heygen-avatar-video](heygen-avatar-video.md)
-- **Other generated video:** Higgsfield, for b-roll, product shots and character-consistent clips driven from Claude Code. See [higgsfield-generative-video](higgsfield-generative-video.md)
+- **Other generated video:** Higgsfield, for b-roll (supporting footage), product shots and character-consistent clips driven from Claude Code. See [higgsfield-generative-video](higgsfield-generative-video.md)
+- **Music, effects and loudness:** [audio-ducking-and-mix](audio-ducking-and-mix.md)
+- **Real logos and screenshots timed to speech:** [overlay-asset-research](overlay-asset-research.md)
 - **Which approach when:** [choosing-a-video-approach](choosing-a-video-approach.md)
+
+Two things to know before you start. First, check whether your company needs a paid Remotion licence (verify on Remotion's current licence page). Second, if you also have HyperFrames skills installed, name Remotion explicitly in every request, because the HyperFrames router skill (the skill that picks a workflow, HyperFrames being the HTML-based alternative engine) otherwise takes over any video request (see "Router precedence" in [html-native-video-workflows](html-native-video-workflows.md)).
 
 ## 1. Folder structure
 
@@ -54,7 +58,7 @@ Writing the brand down in `master_context_brand.md` is necessary but not
 sufficient. A prose description is something the model can drift away from
 under pressure. Three mechanisms turn it into something it cannot get wrong.
 
-**A token module, mirrored from the product's real source.** Put the colours,
+**A token module, mirrored from the product's real source.** Design tokens are the named values of a brand (colours, fonts, corner radii, shadows). Put the colours,
 fonts, radii and shadows in one typed module (`src/theme/tokens.ts`) that every
 composition imports, and derive the values from wherever the product actually
 defines them, the stylesheet or design-token file the live app ships. Add a
@@ -97,12 +101,12 @@ appear in prose should name its source.
 3. Builds a script from that (scene by scene)
 4. Translates the script into Remotion components (React), importing tokens and
    the wordmark rather than restyling per scene
-5. Renders as MP4/WebM
+5. Renders as an MP4 or WebM video file
 
 Before publishing a re-render, check what actually changed. Render a still at a
 frame where the change should be visible and look at it, in both themes, rather
 than trusting that the composition compiled. If the videos are served from
-object storage, re-download one afterwards and inspect a frame from it: an
+online file storage (object storage), re-download one afterwards and inspect a frame from it: an
 upload that returns success can still leave the old asset in place behind a
 cache.
 
@@ -113,3 +117,15 @@ npx create-remotion
 ```
 
 Then set up the folder structure above and see the [Remotion docs](https://www.remotion.dev/docs).
+
+Finish with the shared sound pass in [audio-ducking-and-mix](audio-ducking-and-mix.md): music under the voice and a final loudness of -16 LUFS integrated and -1.5 dBTP true peak (LUFS is the average loudness of the whole video, dBTP its highest peak; some platforms play back at about -14 LUFS, so verify per platform).
+
+## Prompt to give your agent
+
+> Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/remotion-video-generation.md
+>
+> Goal: a `[length]` video about `[product or feature]` for `[audience]`, format `[16:9 or 9:16]`, language `[language]`.
+> References: `[website URL, codebase or folder, brand files (logo, fonts, colours), voice provider and voice ID with its key stored as an environment variable]`. Use nothing else and invent no facts, logos or figures.
+> Taste: `[the look and feel, pace, what to avoid]`.
+>
+> Work in this order and stop where I say: (1) tell me what you need to install and why, and wait for my answer; (2) set up the folder structure and the three context files from the pattern and show them to me; (3) build a token module from the product's real source and use the real logo file; (4) write the script scene by scene and wait for my approval; (5) render stills first and show them, then one short test video. Ask before you install anything or spend anything. Never ask me to paste a key. Mark anything you could not verify as `verify`.

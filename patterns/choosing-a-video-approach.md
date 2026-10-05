@@ -1,6 +1,14 @@
 # Choosing a video approach: footage, code, generation or avatar
 
-A decision guide for the video patterns in this repository. Each approach is good at one kind of thing and bad at another. Most good short videos combine two or three of them, with one rule: **whatever must be exact is built or recorded, whatever only needs to feel right can be generated.**
+**Start here for video.** This page is the entry point to all eight video patterns in this repository. Each approach is good at one kind of thing and bad at another. Most good short videos combine two or three of them, with one rule: **whatever must be exact is built or recorded, whatever only needs to feel right can be generated.**
+
+**In five lines**
+
+1. Real person on camera whose presence matters: film them, then clean up the recording ([talking-head-autocut](talking-head-autocut.md)).
+2. Anything a viewer can check (text, numbers, logos, product screens): build it in code or take it from real files, never from a generative model.
+3. Footage you cannot film: generate short, silent, text-free clips ([higgsfield-generative-video](higgsfield-generative-video.md)). A presenter who must speak but cannot be filmed: an avatar ([heygen-avatar-video](heygen-avatar-video.md)).
+4. Every route ends in the same sound pass: licensed music, voice-led ducking, loudness of -16 LUFS ([audio-ducking-and-mix](audio-ducking-and-mix.md)).
+5. Words such as verify, manifest, edit list and cue file are explained in [Words used in these patterns](#words-used-in-these-patterns) below.
 
 > **Not a developer? You do not need to read the rest of this page. Claude does.**
 >
@@ -12,17 +20,6 @@ A decision guide for the video patterns in this repository. Each approach is goo
 >
 > More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
 
-## The six approaches in one line each
-
-| Approach | One line | Pattern |
-| --- | --- | --- |
-| Recorded footage cleanup | A real person on camera, cut tight, framed for vertical | [talking-head-autocut](talking-head-autocut.md) |
-| On-screen assets | Real logos, screenshots and visuals timed to what is said | [overlay-asset-research](overlay-asset-research.md) |
-| Audio | Licensed music, effects, voice-led ducking, measured loudness | [audio-ducking-and-mix](audio-ducking-and-mix.md) |
-| Code-built motion graphics | The video is a web page or React project an agent writes and renders | [html-native-video-workflows](html-native-video-workflows.md), [remotion-video-generation](remotion-video-generation.md) |
-| Generative clips | A model invents footage or stills from a prompt | [higgsfield-generative-video](higgsfield-generative-video.md) |
-| Avatars | A synthetic presenter speaks your script, optionally in many languages | [heygen-avatar-video](heygen-avatar-video.md) |
-
 ## Decision table
 
 Find your situation, read across.
@@ -32,9 +29,9 @@ Find your situation, read across.
 | You recorded yourself talking and it is rambling, with pauses and restarts | Footage cleanup | Word timestamps give surgical cuts; the real person stays real | Cutting from the transcript alone and leaving fillers in the audio; static crop that loses the face | [talking-head-autocut](talking-head-autocut.md) |
 | A spoken video needs logos, screenshots or product visuals at the right moment | On-screen assets | Official sources, a manifest, a timed cue file; nothing invented | Fuzzy or outdated logos; screenshots with private data in them | [overlay-asset-research](overlay-asset-research.md) |
 | Voice, music and effects fight each other, or loudness differs between platforms | Audio | Ducking follows the voice; loudness is measured, licences are recorded | Unlicensed tracks; music that masks the voice; clipping after normalisation | [audio-ducking-and-mix](audio-ducking-and-mix.md) |
-| You need a branded ad spot, title cards, animated numbers or kinetic captions | Code-built motion graphics | Exact fonts, colours, logo and copy; edits are text changes, not new generations | Typographic stand-in instead of the real logo; rendering before looking at stills | [html-native-video-workflows](html-native-video-workflows.md) |
-| You need charts, data stories or a product UI shown in motion | Code-built motion graphics | Numbers come from data, not from a model's guess | Hard-coded numbers that drift from the source; unchecked claims | [html-native-video-workflows](html-native-video-workflows.md) |
-| You already have a React codebase and design tokens and want videos that match the app | Remotion | Reuse components and tokens; mature cloud rendering | Colours and fonts hard-coded in scenes instead of imported | [remotion-video-generation](remotion-video-generation.md) |
+| You need a branded ad spot, title cards, animated numbers or kinetic captions (text that moves with the speech) | Code-built motion graphics | Exact fonts, colours, logo and copy; edits are text changes, not new generations | Typographic stand-in instead of the real logo; rendering before looking at stills | [html-native-video-workflows](html-native-video-workflows.md) |
+| You need charts, data stories or a product interface shown in motion | Code-built motion graphics | Numbers come from data, not from a model's guess | Hard-coded numbers that drift from the source; unchecked claims | [html-native-video-workflows](html-native-video-workflows.md) |
+| You already have a React codebase and design tokens and want videos that match the app | Remotion (code-built, React-based) | Reuse components and tokens; mature cloud rendering | Colours and fonts hard-coded in scenes instead of imported | [remotion-video-generation](remotion-video-generation.md) |
 | A facts-based explainer for training or awareness | Code-built workflow with a facts file | Every claim has a source and a status before it is spoken | Voiceover makes an unchecked claim sound authoritative | [html-native-video-workflows](html-native-video-workflows.md) |
 | You need atmosphere footage you cannot film (a place, a mood, an abstract idea) | Generative clips | Cheap, fast, no shoot; good for texture between exact parts | Garbled text and logos; physics errors; mixed frame rates | [higgsfield-generative-video](higgsfield-generative-video.md) |
 | You need product stills or short product clips from a photo | Generative clips (reference-driven) | Consistent product placement across studio and lifestyle scenes | Labels and small print altered; product shape drift | [higgsfield-generative-video](higgsfield-generative-video.md) |
@@ -46,6 +43,30 @@ Find your situation, read across.
 | A real expert's real opinion, testimonial or apology | Recorded footage | Trust depends on the real person | Replacing the person with an avatar to save time | [talking-head-autocut](talking-head-autocut.md) |
 
 Both a generative platform and an avatar platform can make "a person talking". Prefer the avatar tool when the spoken words and lip sync matter, the generative tool when the person is a silent character in a scene.
+
+## All eight video patterns in one line each
+
+| Pattern | What it is for, in plain words |
+| --- | --- |
+| **choosing-a-video-approach** (this page) | Decide which of the other seven to use, and in which order to combine them |
+| [talking-head-autocut](talking-head-autocut.md) | Turn a raw recording of one person talking into a tight vertical short: pauses, fillers and restarts removed |
+| [overlay-asset-research](overlay-asset-research.md) | Find the real logos, screenshots and document excerpts a spoken video should show, and when to show them |
+| [audio-ducking-and-mix](audio-ducking-and-mix.md) | Add licensed music and sound effects, make music dip under the voice, and set the final loudness |
+| [html-native-video-workflows](html-native-video-workflows.md) | Build ad spots, explainers and release-notes clips as code (HTML) that an agent writes and renders |
+| [remotion-video-generation](remotion-video-generation.md) | Build on-brand videos as a React project, reusing your product's colours, fonts and logo |
+| [higgsfield-generative-video](higgsfield-generative-video.md) | Generate short footage and stills you cannot film (b-roll, product shots, a consistent character) |
+| [heygen-avatar-video](heygen-avatar-video.md) | Make a synthetic presenter speak your script, optionally translated into other languages |
+
+## Words used in these patterns
+
+- **verify.** Written in the text: the author could not confirm the statement from an official page, so check the vendor's current page before relying on it. As a value in a manifest file (for example `"commercial_use": "verify"`): a person must read the licence and replace it with a real answer. Nothing is ready to publish while a `verify` is left in a manifest.
+- **Edit list (EDL).** A small file that says which parts of a recording to keep, in which order and with which framing. You approve it before anything is rendered. Short for edit decision list.
+- **Cue file.** A file (`cues.json`) that says when each on-screen visual appears and disappears, computed from the words of the transcript.
+- **Manifest.** A list with one entry per file (logo, screenshot, music track, generated clip) recording where it came from and under which licence or permission. Nothing goes into the video that is not in the manifest.
+- **Contract.** A short shared file stating the size, frame rate and rules every tool's output must follow, so the pieces fit together (see Workflow below).
+- **Loudness standard.** All patterns use **-16 LUFS integrated, -1.5 dBTP true peak**. LUFS is the average perceived loudness of the whole video; dBTP is the highest level the sound reaches (true peak), which should stay below -1.5. Some platforms play back at about -14 LUFS; -16 is a safe, consistent target. Platforms differ and change their rules, so verify per platform. Details in [audio-ducking-and-mix](audio-ducking-and-mix.md).
+- **ffmpeg** is the free command line tool that cuts, converts and measures video and audio; **ffprobe** is its companion that reports a file's size, frame rate and codec.
+- **b-roll** is supporting footage shown over or between the main shots.
 
 ## A quick way to decide
 
@@ -68,9 +89,9 @@ This page needs nothing installed. The approaches it points to do. Claude asks b
 | Footage cleanup | ffmpeg, a transcriber with word timestamps, Python | Nothing, but you decide which recordings may be processed |
 | On-screen assets | A browser or scraper the agent can use | Permission to use each logo or screenshot; you check licences |
 | Audio | ffmpeg | Licences for music and effects; you download licensed files yourself |
-| Code-built video | Node.js 22 or newer, ffmpeg, a framework (HyperFrames or Remotion) | Voice provider account if you want a synthetic voice; the key goes in an environment variable you set |
+| Code-built video | Node.js and ffmpeg, plus a framework (HyperFrames needs Node.js 22 or newer; for Remotion check its current requirement: verify) | A text-to-speech (TTS) provider account if you want a synthetic voice; the key goes in an environment variable you set |
 | Generative clips | A command line tool or a connector, set up by the agent | A paid platform account, the browser sign-in, uploads of your reference files, consent for any real face or voice |
-| Avatars | A connector or command line tool; optionally an API key | A platform account, the sign-in, an API key in an environment variable if you use the API, consent recording for a digital twin |
+| Avatars | A connector or command line tool; optionally an API key (an API is the way a service lets software control it) | A platform account, the sign-in, an API key in an environment variable if you use the API, consent recording for a digital twin |
 
 Never paste keys, tokens or passwords into the chat or into project files. If the agent asks, stop and set them as environment variables yourself.
 
@@ -120,9 +141,9 @@ Ask for the boundary explicitly:
 
 1. **One spec.** Every clip, whatever its origin, has the same size, frame rate and codec. Probe them with ffprobe.
 2. **Exact parts verified.** Captions against the script, numbers against the data file, logos against the real files.
-3. **Generated parts inspected.** Contact sheets for generated clips; no invented text or marks; faces and hands looked at.
+3. **Generated parts inspected.** Contact sheets (a grid of still frames from a clip) for generated clips; no invented text or marks; faces and hands looked at.
 4. **Presenter checks.** Any avatar or cloned voice has a consent note and a disclosure decision.
-5. **Audio.** One voice, ducked music, no leftover native audio, measured loudness.
+5. **Audio.** One voice, ducked music, no leftover native audio, loudness measured and at -16 LUFS integrated, -1.5 dBTP true peak (see the loudness standard above).
 6. **Rights manifest.** Every font, music file, logo, generated clip and avatar has a line stating source and permission.
 7. **Fresh-eyes viewing.** Watch the whole thing once at full size with sound, on a phone if the target is a phone.
 
@@ -159,11 +180,12 @@ Why this split: the generated footage only provides mood, where an error is harm
 - **Style whiplash.** A photoreal clip next to a flat vector scene feels accidental. Pick a visual rule and apply colour treatment consistently.
 - **Paying twice.** Do not generate in the hosted tool what code gives you for free (titles, captions, charts).
 - **Skipping the label.** Decide on disclosure when you plan, not when you publish.
+- **Two code engines in one project.** If you use HyperFrames skills and also want Remotion, name the engine you want in every request, because the HyperFrames router skill otherwise takes over any video request. Details under "Router precedence" in [html-native-video-workflows](html-native-video-workflows.md).
 - **Tool facts from memory.** Models, endpoints and prices change monthly. Have the agent read the current vendor pages; mark what it cannot confirm.
 
 ## Cost and licensing notes (as of 2026-10-05, verify)
 
-- Footage cleanup, code-built video and the audio pass run on your own computer with open-source tools; the main cost is your agent usage. Licences still apply to fonts, logos, music and any code framework you choose (the html-native pattern notes the differing licences of HyperFrames and Remotion).
+- Footage cleanup, code-built video and the audio pass run on your own computer with open-source or free tools; the main cost is your agent usage. Licences still apply to fonts, logos, music and any code framework you choose. Remotion's licence may require a paid plan for some companies: check whether yours does. HyperFrames is open source under Apache 2.0.
 - Generative and avatar platforms charge credits or plan fees and have their own terms about ownership, consent and acceptable use; see the cost sections of [higgsfield-generative-video](higgsfield-generative-video.md) and [heygen-avatar-video](heygen-avatar-video.md). No prices are repeated here because they change.
 - Always ask the agent for a cost estimate before any paid generation, and keep a manifest of what was generated, with which tool, and under which rights.
 
@@ -171,6 +193,8 @@ Why this split: the generated footage only provides mood, where an error is harm
 
 > Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/choosing-a-video-approach.md
 >
-> I want to make `[what the video is, who watches, how long, which format, which language]`. I have `[raw footage / script / product photos / brand files / nothing yet]`.
+> Goal: `[what the video is, who watches, how long, which format, which language]`.
+> References: `[raw footage / script / product photos / brand files / nothing yet]`.
+> Taste: `[mood, pace, what to avoid]`.
 >
-> Do this and then stop for my answer: (1) ask me at most three questions; (2) walk through the decision questions in the pattern and recommend the approaches to combine, with one sentence of reasoning each; (3) list, per approach, what I must set up or approve myself (accounts, sign-ins, consent, licences), what it will cost me in time and in paid credits (estimate only, never spend), and the biggest risk; (4) write the contract between steps (size, frame rate, silent clips or not, who owns the clock); (5) tell me which parts must be exact and will be built in code; (6) list anything where a realistic synthetic person or voice is involved and what consent and labelling I need. Do not build or generate anything until I say yes. Mark anything you could not verify.
+> Work in this order and stop for my answer: (1) ask me at most three questions; (2) walk through the decision questions in the pattern and recommend the approaches to combine, with one sentence of reasoning each; (3) list, per approach, what I must set up or approve myself (accounts, sign-ins, consent, licences), what it will cost me in time and in paid credits (estimate only, never spend), and the biggest risk; (4) write the contract between steps (size, frame rate, silent clips or not, who owns the clock); (5) tell me which parts must be exact and will be built in code; (6) list anything where a realistic synthetic person or voice is involved and what consent and labelling I need. Do not build or generate anything until I say yes. Ask before you install anything or spend anything. Mark anything you could not verify as `verify`.

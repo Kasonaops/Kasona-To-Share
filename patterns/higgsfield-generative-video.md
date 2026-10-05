@@ -1,6 +1,6 @@
 # Generative image and video clips with Higgsfield + Claude Code
 
-A pattern for using a generative image and video platform, [Higgsfield](https://higgsfield.ai), as a clip factory that Claude Code drives for you: b-roll, product shots, character-consistent clips, motion transfer, reframing, upscaling and dubbing. The platform bundles many third-party and in-house models behind one account and one credit balance. Everything it makes is **raw material**. Anything that must be exact (text, logos, numbers, charts) is added afterwards in code, see [html-native-video-workflows](html-native-video-workflows.md) and [remotion-video-generation](remotion-video-generation.md).
+A pattern for using a generative image and video platform, [Higgsfield](https://higgsfield.ai), as a clip factory that Claude Code drives for you: b-roll (supporting footage shown over or between main shots), product shots, character-consistent clips, motion transfer, reframing, upscaling and dubbing. The platform bundles many third-party and in-house models behind one account and one credit balance. Everything it makes is **raw material**. Anything that must be exact (text, logos, numbers, charts) is added afterwards in code, see [html-native-video-workflows](html-native-video-workflows.md) and [remotion-video-generation](remotion-video-generation.md).
 
 > **Not a developer? You do not need to read the rest of this page. Claude does.**
 >
@@ -10,7 +10,7 @@ A pattern for using a generative image and video platform, [Higgsfield](https://
 >
 >    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/higgsfield-generative-video.md. I want [what you need, e.g. five 6-second b-roll clips for a video about X]. Tell me what you need me to set up first, and tell me the credit cost and wait for my yes before every generation.*
 >
-> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right tool? Read [choosing-a-video-approach](choosing-a-video-approach.md).
+> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right approach? Start with [choosing-a-video-approach](choosing-a-video-approach.md).
 
 Status of this page: written 2026-10-05 from the vendor's own help pages and from a read-only look at what its connector lists. Model names, limits and prices change often. Where a claim could not be confirmed from an official page it is marked **verify**.
 
@@ -30,7 +30,7 @@ Do **not** choose it for exact text, exact logos, charts, numbers, interface scr
 
 ## Setup (Claude Code, MCP or CLI)
 
-There are two official routes. Both use your own account and its credits, and neither needs an API key.
+MCP (Model Context Protocol) is a standard way to connect an AI assistant to an outside service; the connection is called a connector. A CLI is a command line interface, a tool you control by typing commands. There are two official routes. Both use your own account and its credits, and neither needs an API key (the secret code that lets software use an account).
 
 | Route | For | How it connects |
 | --- | --- | --- |
@@ -59,7 +59,7 @@ Do not hard-code model names in your instructions. Have the agent ask the platfo
 3. **Style frames first.** Generate stills with an image model, pick the winners, and use them as the start frame (and optionally end frame) for video. Stills are cheaper than video, and a fixed start frame is the strongest consistency tool you have.
 4. **Cheap test per shot.** Use a fast or budget model, or a draft mode if the model offers one (one current model lists a low-resolution draft that can be finalized later: **verify**), at the lowest resolution. Judge motion and framing, not sharpness.
 5. **Final render of approved shots only.** Raise resolution and quality; switch audio off unless you want native audio.
-6. **Download, conform, log.** Pull the files into the project, conform every clip to one frame rate, size and codec, and write the generation ledger (below).
+6. **Download, conform, log.** Pull the files into the project, conform every clip to one frame rate, size and codec using ffmpeg (a free command line video tool), and write the generation manifest (below), one entry per clip.
 7. **Hand off.** Clips go into the code-built composition, together with exact text, logos and numbers added in code, and the audio mix ([audio-ducking-and-mix](audio-ducking-and-mix.md)).
 
 Shot list example:
@@ -70,7 +70,7 @@ Shot list example:
 | 2 | Product on plinth | 4 | Product photo | Orbit left | Reference-driven model | Label text |
 | 3 | Wide city dawn | 6 | None | Static | Text-to-video, cheap | None |
 
-Conform and ledger:
+Conform and generation manifest:
 
 ```bash
 ffmpeg -i raw/clip01.mp4 -an -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30" \
@@ -90,7 +90,7 @@ ffmpeg -i raw/clip01.mp4 -an -vf "scale=1080:1920:force_original_aspect_ratio=in
 }
 ```
 
-The ledger is how you reproduce, explain or replace a clip later.
+The generation manifest is how you reproduce, explain or replace a clip later.
 
 ## Prompt patterns that work
 
@@ -131,13 +131,13 @@ Examples (generic, replace the nouns):
 
 Run these before a clip enters the edit:
 
-1. **Contact sheet.** `ffmpeg -i clip.mp4 -vf "fps=2,scale=320:-1,tile=6x2" sheet.png` and look at it. Hands, faces, text-like shapes and objects that appear or vanish show up immediately.
+1. **Contact sheet** (a grid of still frames from the clip). `ffmpeg -i clip.mp4 -vf "fps=2,scale=320:-1,tile=6x2" sheet.png` and look at it. Hands, faces, text-like shapes and objects that appear or vanish show up immediately.
 2. **First and last frame.** Does the clip start where the start frame was, and end somewhere usable for a cut?
 3. **Hallucinated text and logos.** Any readable text or brand mark that you did not supply is a defect. Regenerate or crop.
 4. **Physics and continuity.** Liquids, hands holding objects, fabric, reflections, number of fingers or legs.
 5. **Spec conformity.** Frame rate, size, codec and aspect ratio match the project. Variable frame rate is a common cause of sync drift: conform with ffmpeg as above.
 6. **Series consistency.** Put all clips of one character or product side by side. Same face, same colours, same proportions?
-7. **Rights note.** The ledger line is filled: no real person without consent, no third-party mark, no celebrity lookalike.
+7. **Rights note.** The generation manifest entry is filled: no real person without consent, no third-party mark, no celebrity lookalike.
 8. **Disclosure decision.** Realistic synthetic footage may need a label (see the licensing section).
 
 ## Where it is weak, and what to build as code instead
@@ -146,7 +146,7 @@ Run these before a clip enters the edit:
 | --- | --- | --- |
 | Text in frame (titles, captions, signs, packaging) | Garbled or changing letters, especially in motion | Titles and captions as HTML or React layers over the clip |
 | Exact brand logos | Models invent near-misses | The real logo file as an overlay component |
-| Charts, diagrams, numbers, UI screenshots | Plausible but wrong; viewers may rely on them | Data-driven charts in code; real screenshots (see [overlay-asset-research](overlay-asset-research.md)) |
+| Charts, diagrams, numbers, interface (UI) screenshots | Plausible but wrong; viewers may rely on them | Data-driven charts in code; real screenshots (see [overlay-asset-research](overlay-asset-research.md)) |
 | Long takes and precise timing | Clips are seconds long; timing varies per generation | Cut several short clips on a timeline you control |
 | Hands, object handling, crowds | Frequent artefacts | Frame so they are out of shot or blurred, or film it for real |
 | Speech from a character | Lip sync and voice vary | An avatar tool ([heygen-avatar-video](heygen-avatar-video.md)) or recorded footage ([talking-head-autocut](talking-head-autocut.md)) |
@@ -184,4 +184,4 @@ Some image models in the catalog are tagged by the vendor as strong at text rend
 > References: `[product photos, brand colours file, character photos I own or have permission to use]`. Use nothing else and do not imitate any real person or brand.
 > Taste: `[mood, pace, light, what to avoid]`.
 >
-> Order of work, stop where I say: (1) check that Higgsfield is connected by asking for my credit balance; if it is not connected, tell me what I must do myself and stop; (2) write `brief.md` and a shot list table and wait for my approval; (3) ask the platform which models fit each shot, and tell me model, duration, resolution and estimated credits per request; (4) generate stills first, show me the contact sheet, wait for approval; (5) generate cheap test clips, then finals only for approved shots, audio off; (6) conform every clip to `[size, fps]`, build a contact sheet, fill the generation ledger. Ask for my yes before every generation that spends credits. Never paste or store any token, key or password. Mark anything you could not verify.
+> Order of work, stop where I say: (1) check that Higgsfield is connected by asking for my credit balance; if it is not connected, tell me what I must do myself and stop; (2) write `brief.md` and a shot list table and wait for my approval; (3) ask the platform which models fit each shot, and tell me model, duration, resolution and estimated credits per request; (4) generate stills first, show me the contact sheet, wait for approval; (5) generate cheap test clips, then finals only for approved shots, audio off; (6) conform every clip to `[size, fps]`, build a contact sheet, fill the generation manifest. Ask for my yes before every generation that spends credits. Ask before you install anything. Never paste or store any token, key or password. Mark anything you could not verify as `verify`.

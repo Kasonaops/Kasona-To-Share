@@ -1,6 +1,6 @@
 # Talking-head auto-cut with Claude Code
 
-A pattern for turning a raw recording of one person talking into a tight short-form cut: silences, filler words and false starts removed using word-level timestamps, hard cuts between two or three punch-in framings, and a 9:16 export. The agent writes an edit decision list (EDL) first, you review it, and only then does ffmpeg render.
+A pattern for turning a raw recording of one person talking into a tight short-form cut: silences, filler words and false starts removed using word-level timestamps (the start and end second of every spoken word), hard cuts between two or three punch-in framings (zoomed-in crops of the same footage), and a 9:16 vertical export. The agent writes an edit list (EDL, short for edit decision list) first, you review it, and only then does ffmpeg (a free command line video tool) render.
 
 > **Not a developer? You do not need to read the rest of this page. Claude does.**
 >
@@ -10,20 +10,20 @@ A pattern for turning a raw recording of one person talking into a tight short-f
 >
 >    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/talking-head-autocut.md. Cut the video in this folder into one vertical short, following the pattern. Show me the edit list before you render anything.*
 >
-> More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
+> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right approach? Start with [choosing-a-video-approach](choosing-a-video-approach.md).
 
 ## What you get
 
 - A cut that keeps only the best take of each sentence (no stumbles, no dead air)
 - Hard cuts between 2 to 3 framings of the same footage, so the picture keeps moving without effects
-- A vertical 1080x1920 file, plus the EDL as plain JSON you can edit and re-render in seconds
+- A vertical 1080x1920 file, plus the edit list (EDL) as plain JSON (a simple structured text format) you can edit and re-render in seconds
 
-Everything is deterministic after the EDL is approved: the same EDL and the same source always give the same video.
+Everything is repeatable after the edit list (EDL) is approved: the same EDL and the same source always give the same video.
 
 ## Tools
 
-- **ffmpeg** and **ffprobe** (cutting, cropping, fades, encoding)
-- **A transcriber with word-level timestamps.** Local option: [whisper.cpp](https://github.com/ggml-org/whisper.cpp). Any hosted transcription service that returns per-word start and end times works too.
+- **ffmpeg** and **ffprobe** (ffmpeg cuts, crops, fades and encodes; ffprobe reports a file's size, frame rate and codec)
+- **A transcriber with word-level timestamps.** Local option: [whisper.cpp](https://github.com/ggml-org/whisper.cpp), a free speech-to-text program that runs on your computer. Any hosted transcription service that returns per-word start and end times works too.
 - **Python 3** for the small EDL-to-ffmpeg script below
 
 Claude asks before installing anything.
@@ -97,7 +97,7 @@ The reframe is a plain crop around a fixed point, the **anchor**, given as fract
 - A 16:9 source cropped to 9:16 uses only about a third of its width. At 1080p source resolution the `wide` layout is already an upscale; record in 4K if you can.
 - If the speaker moves a lot, use a wider crop or a dedicated tracking tool (verify what your editor offers). Do not pretend a static crop will follow them.
 
-## 5. The EDL
+## 5. The edit list (EDL)
 
 One JSON file is the single source of truth. Segment times refer to the **source** file; the output is the concatenation in order.
 
@@ -165,7 +165,7 @@ subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", edl[
 
 For long recordings with many segments, write the filter graph to a file and pass it with `-filter_complex_script` instead of one very long argument.
 
-Optional follow-ups, each its own pattern: [overlay-asset-research](overlay-asset-research.md) for on-screen logos and screenshots, [audio-ducking-and-mix](audio-ducking-and-mix.md) for music and loudness, and a subtitle pass.
+Optional follow-ups, each its own pattern: [overlay-asset-research](overlay-asset-research.md) for on-screen logos and screenshots, [audio-ducking-and-mix](audio-ducking-and-mix.md) for music and loudness, and a subtitle pass. The audio pattern sets the loudness standard used across these video patterns, -16 LUFS integrated and -1.5 dBTP true peak (LUFS and dBTP are loudness units, explained there).
 
 ## 7. Check before you ship
 
@@ -183,13 +183,13 @@ Optional follow-ups, each its own pattern: [overlay-asset-research](overlay-asse
 - **Layout switches mid-sentence.** Feels like a glitch, not an edit.
 - **Assuming the face will be tracked.** It will not. Check stills.
 - **Stale whisper flags.** The flags above match the current whisper.cpp CLI README; older builds name the binary and some options differently. Run `whisper-cli --help` if something is not recognised.
-- **Rendering before approval.** Re-rendering is cheap, but re-explaining a bad cut is not. Approve the EDL table first.
+- **Rendering before approval.** Re-rendering is cheap, but re-explaining a bad cut is not. Approve the edit list (EDL) table first.
 
 ## Prompt to give your agent
 
 > Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/talking-head-autocut.md
 >
 > Goal: turn `[raw video file]` into one vertical short of `[target length, e.g. 45 seconds]` for `[platform]`.
-> Audience and taste: `[who watches, how fast it should feel, any rules like "never cut mid-sentence"]`.
+> Taste: `[who watches, how fast it should feel, any rules like "never cut mid-sentence"]`.
 >
-> Work in this order and stop at step 3 for my approval: (1) extract audio and transcribe with word-level timestamps, using whisper.cpp if it is installed, otherwise tell me what you would use; (2) mark fillers, false starts and long pauses, keeping the last complete take of any repeated sentence; (3) write `edl.json` with layouts `wide`, `punch1`, `punch2`, switching layout only at sentence boundaries, and show me a readable table of the cut plus the total seconds removed. After my approval, render with ffmpeg, extract one still per layout and one still per cut, and tell me anything that looks off. Use the defaults from the pattern unless I say otherwise. Do not install anything without asking me first.
+> Work in this order and stop at step 3 for my approval: (1) extract audio and transcribe with word-level timestamps, using whisper.cpp if it is installed, otherwise tell me what you would use; (2) mark fillers, false starts and long pauses, keeping the last complete take of any repeated sentence; (3) write `edl.json` (the edit list) with layouts `wide`, `punch1`, `punch2`, switching layout only at sentence boundaries, and show me a readable table of the cut plus the total seconds removed. After my approval, render with ffmpeg, extract one still per layout and one still per cut, and tell me anything that looks off. Use the defaults from the pattern unless I say otherwise. Ask before you install anything. Mark anything you could not verify as `verify`.

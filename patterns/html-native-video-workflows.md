@@ -1,6 +1,6 @@
 # Three video workflows on an HTML-native framework
 
-A pattern for making motion graphics and explainer videos with Claude Code, where the video is code (HTML, CSS, animation) that an agent writes, a renderer plays frame by frame, and ffmpeg encodes. Three workflows: an ad spot for a software product from its website, a faceless explainer with self-drawn figures, and a release-notes clip from a pull request.
+A pattern for making motion graphics and explainer videos with Claude Code, where the video is code (HTML and CSS, the languages web pages are built from, plus animation) that an agent writes, a renderer plays frame by frame, and ffmpeg (a free command line video tool) encodes into an MP4 file. Three workflows: an ad spot for a software product from its website, a faceless explainer with self-drawn figures, and a release-notes clip from a pull request (a proposed code change on GitHub).
 
 [HyperFrames](https://github.com/heygen-com/hyperframes) (open source, Apache 2.0, from HeyGen) is the worked example. [Remotion](https://www.remotion.dev) is the React-based alternative, covered in [remotion-video-generation](remotion-video-generation.md).
 
@@ -12,7 +12,7 @@ A pattern for making motion graphics and explainer videos with Claude Code, wher
 >
 >    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/html-native-video-workflows.md. I want workflow [a, b or c] for [topic or link]. Tell me what you need to install and why before you do anything, then make a first version and show me still images before the full render.*
 >
-> More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
+> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right approach? Start with [choosing-a-video-approach](choosing-a-video-approach.md).
 
 ## Why video as code
 
@@ -20,9 +20,9 @@ The video is a web page that moves. The agent writes it, a renderer captures eac
 
 ## Install pointers (checked against the HyperFrames CLI v0.8.x skills; its README has the current text)
 
-Requirements: Node.js 22 or newer, and ffmpeg.
+Requirements: Node.js 22 or newer (a free runtime that runs JavaScript programs on your computer), and ffmpeg.
 
-For Claude Code, add the plugin marketplace, then call the router skill:
+A CLI is a command line interface: a tool you control by typing commands, here `npx hyperframes`. The router skill is the skill that picks the right workflow for your request. For Claude Code, add the plugin marketplace, then call the router skill:
 
 ```bash
 claude plugin marketplace add heygen-com/hyperframes
@@ -49,7 +49,7 @@ npx hyperframes preview      # live preview in the browser
 npx hyperframes render       # MP4 output
 ```
 
-The project ships skills the agent loads on demand. The router skill picks the workflow; the three used below are `product-launch-video`, `faceless-explainer` and `pr-to-video`. Other workflows cover plain captions (`embedded-captions`), designed overlays on existing talking-head footage (`talking-head-recut`), short motion graphics, music-driven videos, slideshows, a Remotion port and a general fallback. Domain skills cover composition rules, animation, creative direction, the CLI, media sourcing and audio (for the audio side see [audio-ducking-and-mix](audio-ducking-and-mix.md)). Claude asks before installing anything.
+The project ships skills (instruction packages) the agent loads on demand. The router skill picks the workflow; the three used below are `product-launch-video`, `faceless-explainer` and `pr-to-video`. Other workflows cover plain captions (`embedded-captions`), designed overlays on existing talking-head footage (`talking-head-recut`), short motion graphics, music-driven videos, slideshows, a Remotion port and a general fallback. Domain skills cover composition rules, animation, creative direction, the CLI, media sourcing and audio (for the audio side see [audio-ducking-and-mix](audio-ducking-and-mix.md)). Claude asks before installing anything.
 
 ## The prompting principle: goal, references, taste
 
@@ -67,9 +67,9 @@ You cannot film a service, but you can show what it does for the customer. Input
 
 Flow:
 
-1. **Brand extraction.** From the site, collect the logo (official file), fonts, colour palette and the product's own wording. Write them into a brand file the whole project reads (for example `brand.md`, or a video design spec). HyperFrames' launch workflow does this itself: it captures the site's assets and brand tokens with `npx hyperframes capture <url>` (add `--json` for agent-readable output) unless you ask for a no-capture run. Treat a non-zero exit, `ok: false` in the JSON or a `BLOCKED.md` in the output as a hard stop and do not build from a partial capture. The design spec format is `frame.md`: a file with YAML frontmatter (`colors`, `typography`, `spacing`, `components`, the machine-readable values to quote exactly) plus a markdown body with intent and rules. The file name is always lowercase, and if several specs exist the framework reads `frame.md`, then `design.md`, then `DESIGN.md`. It also ships ready-made `frame.md` presets you can start from.
+1. **Brand extraction.** From the site, collect the logo (official file), fonts, colour palette and the product's own wording. Write them into a brand file the whole project reads (for example `brand.md`, or a video design spec). HyperFrames' launch workflow does this itself: it captures the site's assets and brand tokens with `npx hyperframes capture <url>` (add `--json` for agent-readable output) unless you ask for a no-capture run. Treat a non-zero exit, `ok: false` in the JSON or a `BLOCKED.md` in the output as a hard stop and do not build from a partial capture. The design spec format is `frame.md`: a file with YAML frontmatter (a block of structured settings at the top) (`colors`, `typography`, `spacing`, `components`, the machine-readable values to quote exactly) plus a markdown body with intent and rules. The file name is always lowercase, and if several specs exist the framework reads `frame.md`, then `design.md`, then `DESIGN.md`. It also ships ready-made `frame.md` presets you can start from.
 2. **Script.** 20 to 30 seconds, one promise, one proof, one call to action. Show what the product does for the customer, not an interface tour.
-3. **Voiceover.** Pick a voice at a text-to-speech provider (ElevenLabs is one example) and give the agent its voice ID. The API key lives in an environment variable on your machine and is never pasted into a prompt or a file. The CLI can also generate speech with a local model (`npx hyperframes tts`), which needs no key.
+3. **Voiceover.** Pick a voice at a text-to-speech (TTS) provider (ElevenLabs is one example) and give the agent its voice ID. The API key (the secret code that lets software use your account) lives in an environment variable on your machine and is never pasted into a prompt or a file. The CLI can also generate speech with a local model (`npx hyperframes tts`), which needs no key.
 4. **Background music.** A licensed library track, quiet. See [audio-ducking-and-mix](audio-ducking-and-mix.md).
 5. **Build, then QA gate** (below).
 
@@ -116,7 +116,7 @@ Prompt template:
 
 ## Workflow C: release-notes clip from a pull request
 
-Input is a pull request. The HyperFrames router has a workflow that reads it through the GitHub CLI (`gh`) and turns it into a changelog, feature-reveal or fix explainer.
+Input is a pull request. The HyperFrames router has a workflow that reads it through GitHub's command line tool (`gh`) and turns it into a changelog, feature-reveal or fix explainer.
 
 Flow: the agent reads the title, description, changed files and diff, picks the one or two changes a user would care about, writes a 20 to 45 second script, shows short code or interface moments, and adds narration or captions.
 
@@ -131,20 +131,20 @@ Prompt template:
 
 Never ship on "it rendered". Before the final render:
 
-1. **Lint and check.** `npx hyperframes lint` is the fast static check while you iterate (`--json` for machine-readable output, `--verbose` for info-level findings). `npx hyperframes check` is the required final gate: it reruns the linter, then opens the composition in a headless browser and audits runtime errors, layout (text cut off or overflowing), motion and text contrast. Useful options: `--json`, `--snapshots` (writes annotated overview frames and a crop per finding), `--samples N`, `--at 1.5,4,7.25` and `--strict` (fail on warnings too). Fix every error. `validate`, `inspect` and `layout` are deprecated aliases of `check`; `npx hyperframes doctor` checks your system dependencies.
+1. **Lint and check.** `npx hyperframes lint` is the fast static check while you iterate (`--json` for machine-readable output, `--verbose` for info-level findings). `npx hyperframes check` is the required final gate: it reruns the linter, then opens the composition in a headless browser (a browser without a visible window) and audits runtime errors, layout (text cut off or overflowing), motion and text contrast. Useful options: `--json`, `--snapshots` (writes annotated overview frames and a crop per finding), `--samples N`, `--at 1.5,4,7.25` and `--strict` (fail on warnings too). Fix every error. `validate`, `inspect` and `layout` are deprecated aliases of `check`; `npx hyperframes doctor` checks your system dependencies.
 2. **Snapshot stills.** `npx hyperframes snapshot` writes PNG stills without a full render: `--frames N` for evenly spaced frames (default 5), `--at 1.5,4,7.25` for exact times (use this for each scene's first, middle and last moment), `--zoom "<css selector>"` or `--zoom x,y,w,h` to crop in on one element, and `-o <dir>` for the output folder (default `snapshots/` in the project). Look at them: text readable, nothing cut off, logo correct, brand colours right.
 3. **Caption check.** Compare on-screen captions word by word with the script or voiceover. Check names, numbers and line breaks.
-4. **Audio check.** Voice clear over music, loudness measured (see [audio-ducking-and-mix](audio-ducking-and-mix.md)).
-5. **Facts and licences.** For workflow B every claim `checked`; for A and C every logo and music file has a manifest entry.
+4. **Audio check.** Voice clear over music, loudness measured at -16 LUFS integrated (average loudness) and -1.5 dBTP true peak (highest level), the standard in [audio-ducking-and-mix](audio-ducking-and-mix.md); some platforms play back at about -14 LUFS, so verify per platform.
+5. **Facts and licences.** For workflow B every claim `checked`; for A and C every logo and music file has an entry in the manifest (one line per file with its source and licence).
 
 ## HyperFrames or Remotion?
 
 | | HyperFrames | Remotion |
 | --- | --- | --- |
-| Authoring | HTML, CSS and seekable animation | React components |
+| Authoring | HTML, CSS and seekable animation (animation that can jump to any frame, which is what lets a renderer capture it frame by frame) | React components |
 | Build step | None, `index.html` plays as-is | Bundler |
 | Agent handoff | Plain HTML files | A React project |
-| Licence | Apache 2.0 | Source-available Remotion licence (check whether your company needs a paid one, verify) |
+| Licence | Apache 2.0 | Source-available Remotion licence (check whether your company needs a paid licence: verify) |
 | Cloud rendering | Local, HeyGen-hosted cloud, AWS Lambda and Google Cloud Run (per the CLI) | Remotion Lambda, described by HyperFrames as the more mature cloud renderer |
 
 Choose HyperFrames when you want the shortest path from an agent to a video, plain files you can open anywhere, and no build tooling. Choose Remotion when you already have a React codebase and components to reuse (for example product UI in a video), a token module shared with the app, or a need for its established cloud rendering. The brand-binding ideas in [remotion-video-generation](remotion-video-generation.md) apply to both.
@@ -167,7 +167,7 @@ These numbers come from a single public video by one creator, using a recent top
 - **Rendering before stills.** A full render is the slowest way to find a layout bug.
 - **Keys in prompts.** Use environment variables; never paste credentials into a chat or a file in the project.
 - **Skill and CLI details from memory.** Names and options change between releases; the commands above were checked against v0.8.x. Read the README or run `--help`.
-- **Router precedence.** The HyperFrames router skill declares itself the default framework for any request to make a video, animation or motion graphic. If you also use another engine (for example Remotion), name it explicitly in your request, and say HyperFrames is not wanted for that job, or the router will take over and build the wrong thing.
+- **Router precedence.** The HyperFrames router skill declares itself the default framework for any request to make a video, animation or motion graphic. If you also use another engine (for example Remotion), name it explicitly in your request, and say HyperFrames is not wanted for that job, or the router will take over and build the wrong thing. The same applies to a request that finishes another pattern's output, for example placing an avatar clip from [heygen-avatar-video](heygen-avatar-video.md) into a scene: name the engine.
 - **Installing skills means trusting them.** The installer copies skills into the home skill folders of several agent tools at once (the CLI says it installs to "all supported AI tools"), and the installer says skills run with full agent permissions. Read a skill before you let it in, prefer installing only the named workflow you need (`skills update <name>`), and review changes when it refreshes. Setting `HYPERFRAMES_SKIP_SKILLS=1` stops `init` from checking GitHub for skill updates (useful in CI).
 - **Usage telemetry.** The CLI sends anonymous usage counters. Opt out with `npx hyperframes telemetry disable` (check with `npx hyperframes telemetry status`), or set `HYPERFRAMES_NO_TELEMETRY=1`.
 - **Stills sent to a vision API.** `snapshot` runs a Gemini vision description of the frames by default whenever `GEMINI_API_KEY` is set in your environment. Pass `--describe false` if the frames show anything private.
@@ -183,4 +183,4 @@ These numbers come from a single public video by one creator, using a recent top
 > References: `[website URL, official sources to research, brand file, voice and where its key is stored as an environment variable, music files with licences]`. Use nothing else and invent no facts, logos or figures.
 > Taste: `[the look and feel, pace, what to avoid]`.
 >
-> First tell me what you need to install and why, and wait for my answer. Ask at most three questions. Then build a first version, run the QA gate from the pattern (lint, snapshot stills, caption check), show me the stills, and only then do the full render. Report anything you marked as unverified.
+> First tell me what you need to install and why, and wait for my answer. Ask at most three questions. Then build a first version, run the QA gate from the pattern (lint, snapshot stills, caption check), show me the stills, and only then do the full render. Ask before you install anything. Mark anything you could not verify as `verify`.

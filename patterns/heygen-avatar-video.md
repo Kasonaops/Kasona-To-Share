@@ -1,6 +1,6 @@
 # Avatar and presenter videos with HeyGen + Claude Code
 
-A pattern for producing talking-presenter videos without a camera: a digital avatar speaks a script you control, in a voice you chose or cloned with consent, optionally translated and lip-synced into other languages. [HeyGen](https://www.heygen.com) is the worked example. Claude Code can drive it through HeyGen's MCP connector, its command line tool or its HTTP API. The result is a clip you then finish with captions, overlays and a proper audio mix.
+A pattern for producing talking-presenter videos without a camera: a digital avatar speaks a script you control, in a voice you chose or cloned with consent, optionally translated and lip-synced into other languages. [HeyGen](https://www.heygen.com) is the worked example. Claude Code can drive it through HeyGen's MCP connector (MCP, Model Context Protocol, is a standard way to connect an AI assistant to an outside service), its command line tool (CLI) or its API (the way a service lets software control it). The result is a clip you then finish with captions, overlays and a proper audio mix.
 
 > **Not a developer? You do not need to read the rest of this page. Claude does.**
 >
@@ -10,7 +10,7 @@ A pattern for producing talking-presenter videos without a camera: a digital ava
 >
 >    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/heygen-avatar-video.md. I want a [length] presenter video about [topic] for [audience]. The script is in this folder / write it for me and show it to me first. Tell me what I need to set up myself, and make a 10-second test before the full video.*
 >
-> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure an avatar is the right tool? Read [choosing-a-video-approach](choosing-a-video-approach.md).
+> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right approach? Start with [choosing-a-video-approach](choosing-a-video-approach.md).
 
 Status of this page: written 2026-10-05 from HeyGen's developer documentation, help center and policies. Products and endpoints move quickly; claims that could not be confirmed from an official page are marked **verify**.
 
@@ -36,7 +36,7 @@ What HeyGen offers, in plain terms (names as in its docs):
 | Cinematic avatar | Prompt-directed shots from avatar looks |
 | Video translation and lip sync | Translate an existing video, or replace its audio and re-sync the mouth |
 | Voices | Stock catalogue, voice design from a description, instant clone, professional clone |
-| Transparent-background avatar video | A WebM you can place into your own scenes |
+| Transparent-background avatar video | A WebM file (a video format that can hold transparency) you can place into your own scenes |
 | Brand kit and glossary | Colours, fonts, logo, and fixed pronunciation or no-translate terms |
 
 Do **not** choose an avatar when the viewer needs trust in a real person's real words (statements, testimonials, apologies), when you need exact charts or interface demos as the main content (build those in code), or when you can simply film and clean up ([talking-head-autocut](talking-head-autocut.md)). Also see the generative clip route in [higgsfield-generative-video](higgsfield-generative-video.md) for scenes without a presenter.
@@ -46,7 +46,7 @@ Do **not** choose an avatar when the viewer needs trust in a real person's real 
 HeyGen's own docs describe an order of preference for agents. Summarised:
 
 1. **CLI or API with an API key.** Best for scripts, batches and anything repeatable; billed to API plans. The key lives in an environment variable on your machine (HeyGen's docs use the name `HEYGEN_API_KEY`).
-2. **MCP over OAuth.** Quickest for a first test; no key; billed against your plan's credits. HeyGen's docs call it trial-scale and recommend a key for production.
+2. **MCP over OAuth** (a sign-in in your browser instead of a key). Quickest for a first test; no key; billed against your plan's credits. HeyGen's docs call it trial-scale and recommend a key for production.
 
 Claude Code route for MCP, as documented by HeyGen (run in your terminal, not inside the Claude Code prompt):
 
@@ -73,12 +73,12 @@ One date to know: HeyGen's docs say the older v1 and v2 endpoints are supported 
 2. **Choose the presenter.** In order of risk, lowest first: a stock avatar from the library; a synthetic character from a prompt; your own digital twin (you, with consent); a photo avatar of someone with documented permission. Never a real person without their consent, never a public figure.
 3. **Choose the voice.** Browse stock voices by language, describe the voice you want and let the platform propose up to three, or clone a voice you own (below). Listen to the preview before use.
 4. **Ten-second test.** Render only the first sentences at the target size. Check lip sync on names and numbers, gaze, hands, and that the voice does not mispronounce the product. Fix pronunciation with the brand glossary rather than by misspelling the script.
-5. **Full render.** Prefer the direct avatar video call when you need your exact words. Use Video Agent when you accept the agent's choices, and its chat mode when you want to approve a scene plan first. Poll the video until it completes (typically a few minutes) or use a webhook callback.
+5. **Full render.** Prefer the direct avatar video call when you need your exact words. Use Video Agent when you accept the agent's choices, and its chat mode when you want to approve a scene plan first. Poll the video until it completes (typically a few minutes) or use a webhook callback (the service notifies your program when the video is done).
 6. **Revise by scene.** Video Agent lets you edit named scenes and leave the others untouched. For direct avatar video, change the script and re-render the clip.
 7. **Finish in code.** Add captions from the script (not from speech recognition), lower thirds, logos, charts and screenshots in an HTML or React composition. Place the avatar as a normal clip, or request a transparent-background render and put your own scene behind it. See [html-native-video-workflows](html-native-video-workflows.md).
-8. **Mix and label.** Music under the voice ([audio-ducking-and-mix](audio-ducking-and-mix.md)), then decide on the disclosure label (below).
+8. **Mix and label.** Music under the voice and a final loudness of -16 LUFS integrated and -1.5 dBTP true peak ([audio-ducking-and-mix](audio-ducking-and-mix.md) explains both; some platforms play back at about -14 LUFS, so verify per platform), then decide on the disclosure label (below).
 
-Translation workflow: render or record the source video once, request the target languages, use the proofread option (extract subtitles, edit the SRT, then generate) before spending credits on the final render, apply the glossary so product names stay untranslated, then have a native speaker review each language. Choose "precision" mode for faces that move a lot, are shown from the side or are partly hidden; "speed" is fine for static faces and drafts.
+Translation workflow: render or record the source video once, request the target languages, use the proofread option (extract subtitles, edit the SRT subtitle file, then generate) before spending credits on the final render, apply the glossary so product names stay untranslated, then have a native speaker review each language. Choose "precision" mode for faces that move a lot, are shown from the side or are partly hidden; "speed" is fine for static faces and drafts.
 
 ## The ElevenLabs voice question
 
@@ -134,7 +134,7 @@ Can you use a voice you made at a separate speech provider inside HeyGen? Docume
 
 ## How HeyGen's open-source HyperFrames relates
 
-HyperFrames is a **separate**, open-source (Apache 2.0) framework from the same company that turns HTML, CSS and seekable animation into MP4. It is not the avatar engine. You can use it with no HeyGen account, rendering locally with Node.js and ffmpeg. HeyGen's docs also describe a hosted render endpoint and a pipeline where an avatar clip, music and sound effects are composited into one designed scene, and its prompting guide says Video Agent builds its scenes in code with HyperFrames. For the code-based workflows, install pointers and quality gate, read [html-native-video-workflows](html-native-video-workflows.md). A sensible split: the avatar for the spoken part, HyperFrames or Remotion ([remotion-video-generation](remotion-video-generation.md)) for everything exact around it.
+HyperFrames is a **separate**, open-source (Apache 2.0) framework from the same company that turns web-page code (HTML and CSS, with animation) into an MP4 video file. It is not the avatar engine. You can use it with no HeyGen account, rendering locally with Node.js and ffmpeg. HeyGen's docs also describe a hosted render endpoint and a pipeline where an avatar clip, music and sound effects are combined into one designed scene, and its prompting guide says Video Agent builds its scenes in code with HyperFrames. For the code-based workflows, install pointers and quality gate, read [html-native-video-workflows](html-native-video-workflows.md). A sensible split: the avatar for the spoken part, HyperFrames or Remotion ([remotion-video-generation](remotion-video-generation.md)) for everything exact around it. If you use Remotion, or ask for a scene around the avatar clip, name the engine in your request: the HyperFrames router skill otherwise takes over any video request (see "Router precedence" in the html-native pattern).
 
 ## Cost and licensing notes (as of 2026-10-05, verify)
 
@@ -150,7 +150,7 @@ HyperFrames is a **separate**, open-source (Apache 2.0) framework from the same 
 > Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/heygen-avatar-video.md
 >
 > Goal: a `[length]` presenter video about `[topic]` for `[audience]`, `[portrait or landscape]`, language `[language]`.
-> Script: `[file name, or "draft one and wait for my approval"]`. Use only facts from `[sources I provide]`.
-> Presenter: `[stock avatar / synthetic character / my own digital twin with consent]`. Voice: `[stock voice description / HeyGen clone I own / provider voice I own]`.
+> References: script `[file name, or "draft one and wait for my approval"]`; use only facts from `[sources I provide]`. Presenter: `[stock avatar / synthetic character / my own digital twin with consent]`. Voice: `[stock voice description / HeyGen clone I own / provider voice I own]`.
+> Taste: `[tone, pace, how formal, what to avoid]`.
 >
-> Work in this order and stop where I say: (1) check what HeyGen access exists (connector, command line tool, or environment variable) and tell me what I must set up myself; never ask me to paste a key; (2) show me the script and wait for approval; (3) propose avatar and voice from my library and wait for approval; (4) create a glossary for names and terms; (5) render a 10-second test and report lip sync, pronunciation and any credit cost; (6) after my yes, render the full video; (7) transcribe the result and compare with the script; (8) write `consent-and-disclosure.md` listing who is depicted, who consented, and which platform labels apply. Never create an avatar or clone a voice of a real person unless I confirm in this chat that written consent exists. Mark anything you could not verify.
+> Work in this order and stop where I say: (1) check what HeyGen access exists (connector, command line tool, or environment variable) and tell me what I must set up myself; never ask me to paste a key; (2) show me the script and wait for approval; (3) propose avatar and voice from my library and wait for approval; (4) create a glossary for names and terms; (5) render a 10-second test and report lip sync, pronunciation and any credit cost; (6) after my yes, render the full video; (7) transcribe the result and compare with the script; (8) write `consent-and-disclosure.md` listing who is depicted, who consented, and which platform labels apply. Never create an avatar or clone a voice of a real person unless I confirm in this chat that written consent exists. Ask before you install anything or spend credits. Mark anything you could not verify as `verify`.

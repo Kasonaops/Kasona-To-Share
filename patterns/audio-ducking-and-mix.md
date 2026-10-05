@@ -1,6 +1,6 @@
 # Audio ducking and mix for video with Claude Code
 
-A pattern for the sound of a finished video: licensed library music instead of synthesised music, a music bed that automatically dips under the voice (ducking), a few well-placed sound effects, and a final loudness pass to platform levels. All of it is ffmpeg, so the agent can run it, measure it and repeat it.
+A pattern for the sound of a finished video: licensed library music instead of synthesised music, a music bed that automatically dips under the voice (ducking), a few well-placed sound effects (SFX), and a final loudness pass to platform levels. All of it is ffmpeg, a free command line tool for audio and video, so the agent can run it, measure it and repeat it.
 
 > **Not a developer? You do not need to read the rest of this page. Claude does.**
 >
@@ -10,14 +10,14 @@ A pattern for the sound of a finished video: licensed library music instead of s
 >
 >    *Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/audio-ducking-and-mix.md. Mix the voice, music and sound effects in this folder following the pattern, normalise the loudness, and write the track manifest. Tell me what you measured before and after.*
 >
-> More help: [GETTING-STARTED.md](../GETTING-STARTED.md).
+> More help: [GETTING-STARTED.md](../GETTING-STARTED.md). Not sure this is the right approach? Start with [choosing-a-video-approach](choosing-a-video-approach.md).
 
 ## What you get
 
 - A music bed that sits clearly under the voice and swells back in the pauses
 - Sound effects used sparingly, on moments that earn them
-- A file at a consistent loudness (-16 LUFS integrated, -1.5 dBTP true peak, loudness range 11 LU), verified by measurement
-- A `tracks.json` that records where every sound came from and under which licence
+- A file at a consistent loudness, verified by measurement: **-16 LUFS integrated, -1.5 dBTP true peak**, loudness range 11 LU (explained in section 5)
+- A `tracks.json`, the track manifest (one entry per sound file), that records where every sound came from and under which licence
 
 ## 1. Use licensed library audio, not synthesised audio
 
@@ -99,7 +99,9 @@ Tune by ear and by measurement: with real speech the right `threshold` depends o
 
 ## 5. Loudness: two-pass loudnorm
 
-Default target: **-16 LUFS integrated, -1.5 dBTP true peak, loudness range (LRA) 11 LU**. Some platforms normalise playback to about -14 LUFS; -16 is chosen as a safe, consistent target that leaves headroom without needing hard limiting. Platforms differ and change their rules, so verify per platform. If one destination needs another value, change `I=` in both passes and nothing else.
+The three numbers, in plain words: **LUFS** (loudness units relative to full scale) measures how loud the whole video sounds on average; **dBTP** (decibels true peak) is the highest level the sound reaches, which must stay under the ceiling or the sound can distort; **LRA** (loudness range) is how far loud and quiet parts may differ.
+
+The standard used across all the video patterns in this repository: **-16 LUFS integrated, -1.5 dBTP true peak, loudness range (LRA) 11 LU**. Some platforms normalise playback to about -14 LUFS; -16 is chosen as a safe, consistent target that leaves headroom without needing hard limiting. Platforms differ and change their rules, so verify per platform. If one destination needs another value, change `I=` in both passes and nothing else.
 
 Single-pass `loudnorm` works dynamically and can alter the sound. The two-pass method measures first, then applies a mostly linear gain computed from the measurement, which is cleaner.
 
@@ -157,7 +159,7 @@ Notes:
 - `amix=...:normalize=0` keeps the stems at their set levels. That option exists in recent ffmpeg versions (7.0 or newer, verify with `ffmpeg -h filter=amix`); on older builds, `amix` divides every input by the number of inputs, so compensate with `volume`.
 - `asplit` is needed because the voice feeds both the mix and the ducker.
 - Pass 1 always prints `normalization_type : dynamic`; that is just the mode of the measuring run. Read the same field in `pass2.txt`: `linear` means the measured gain was applied cleanly. If it says `dynamic`, the measurement could not be applied linearly (for example the peaks are too high for the target, so the true-peak limit pulled the result a little below -16 LUFS). Lower the premix level slightly and run again.
-- If your video framework mixes audio itself, use its own step. HyperFrames (CLI v0.8.x) documents a "voiceover carve" in its audio skill: instead of ducking the whole bed, it cuts only the frequency bands the voice occupies and follows the voice level over time, written onto the music track as `data-fx-carve`, `data-fx-chain` and `data-automation`. Its skill treats the carve as required whenever music plays under a voice, run with `node <skill folder>/scripts/carve.mjs --comp index.html` (default strength 0.8). Its CLI also has `npx hyperframes normalize-audio --target <audio element id> --lufs -16`, whose default is -16 as well. Use the ffmpeg route in this pattern when you want one verifiable file and one measurement, for example for audio that leaves the framework.
+- If your video framework mixes audio itself, use its own step. HyperFrames (the code-built video framework from [html-native-video-workflows](html-native-video-workflows.md); its command line tool is the CLI, version v0.8.x) documents a "voiceover carve" in its audio skill: instead of ducking the whole bed, it cuts only the frequency bands the voice occupies and follows the voice level over time, written onto the music track as `data-fx-carve`, `data-fx-chain` and `data-automation`. Its skill treats the carve as required whenever music plays under a voice, run with `node <skill folder>/scripts/carve.mjs --comp index.html` (default strength 0.8). Its CLI also has `npx hyperframes normalize-audio --target <audio element id> --lufs -16`, whose default is -16 as well. Use the ffmpeg route in this pattern when you want one verifiable file and one measurement, for example for audio that leaves the framework.
 
 ## 7. Check before you ship
 
@@ -171,7 +173,7 @@ Notes:
 - **Music too loud before ducking.** Ducking is not a substitute for a sensible bed level.
 - **Pumping.** A short release makes the music jump between words. Use 300 ms or more.
 - **Linear threshold confusion.** `sidechaincompress` takes `threshold` as linear amplitude, not dB.
-- **Shell quoting.** In zsh, `$VAR:linear` is read as a modifier on `$VAR` and silently breaks the filter string. Write `${VAR}` before a colon, as in the script above.
+- **Shell quoting.** In zsh (the default terminal shell on a Mac), `$VAR:linear` is read as a modifier on `$VAR` and silently breaks the filter string. Write `${VAR}` before a colon, as in the script above.
 - **Loudness measured on the wrong file.** Measure the final file, not the premix.
 - **Treating the licence field as optional.** Unchecked licences are the usual reason for a later takedown or claim.
 - **Normalising to a number you did not verify.** Targets differ by platform and change over time.
@@ -180,7 +182,8 @@ Notes:
 
 > Read this pattern: https://github.com/Kasonaops/Kasona-To-Share/blob/main/patterns/audio-ducking-and-mix.md
 >
-> Goal: mix the audio for `[video file]`. The voice is `[file or the video's own audio]`, the music bed is `[file]`, sound effects are `[files]`. Place effects at `[times or "at each overlay cue in cues.json"]`.
+> Goal: mix the audio for `[video file]`.
+> References: the voice is `[file or the video's own audio]`, the music bed is `[file]`, sound effects are `[files]`. Place effects at `[times or "at each overlay cue in cues.json"]`.
 > Taste: `[how present the music should be: barely audible, or clearly felt]`. Destination: `[platform]`.
 >
-> Use only the files I gave you. Do not synthesise music or effects. Build the mix with ffmpeg exactly as in the pattern: duck the music with sidechaincompress, keep effects sparse, normalise with two-pass loudnorm to -16 LUFS, -1.5 dBTP and LRA 11, and verify with ebur128. Report the loudness before and after. Write `tracks.json` for every music and effect file with the source URL, the retrieval date and the licence fields; leave `verify` wherever you cannot read the licence yourself, and list those items for me. Do not install anything without asking first.
+> Use only the files I gave you. Do not synthesise music or effects. Build the mix with ffmpeg exactly as in the pattern: duck the music with sidechaincompress, keep effects sparse, normalise with two-pass loudnorm to -16 LUFS, -1.5 dBTP and LRA 11, and verify with ebur128. Report the loudness before and after. Write `tracks.json` for every music and effect file with the source URL, the retrieval date and the licence fields; leave `verify` wherever you cannot read the licence yourself, and list those items for me. Ask before you install anything. Mark anything you could not verify as `verify`.
