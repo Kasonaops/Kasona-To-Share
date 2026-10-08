@@ -184,3 +184,5 @@ These numbers come from a single public video by one creator, using a recent top
 > Taste: `[the look and feel, pace, what to avoid]`.
 >
 > First tell me what you need to install and why, and wait for my answer. Ask at most three questions. Then build a first version, run the QA gate from the pattern (lint, snapshot stills, caption check), show me the stills, and only then do the full render. Ask before you install anything. Mark anything you could not verify as `verify`.
+
+Looking for a visual look, pacing or chart idea first? See [Where to find visual inspiration](choosing-a-video-approach.md#where-to-find-visual-inspiration) (references only, licence and robots notes included).

@@ -129,3 +129,5 @@ Finish with the shared sound pass in [audio-ducking-and-mix](audio-ducking-and-m
 > Taste: `[the look and feel, pace, what to avoid]`.
 >
 > Work in this order and stop where I say: (1) tell me what you need to install and why, and wait for my answer; (2) set up the folder structure and the three context files from the pattern and show them to me; (3) build a token module from the product's real source and use the real logo file; (4) write the script scene by scene and wait for my approval; (5) render stills first and show them, then one short test video. Ask before you install anything or spend anything. Never ask me to paste a key. Mark anything you could not verify as `verify`.
+
+Looking for a visual look, pacing or chart idea first? See [Where to find visual inspiration](choosing-a-video-approach.md#where-to-find-visual-inspiration) (references only, licence and robots notes included).
